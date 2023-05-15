@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_mvvm/presentation/login/login.dart';
 import 'package:udemy_flutter_mvvm/presentation/on_boarding/on_boarding.dart';
+import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/splash/splash.dart';
 import 'package:udemy_flutter_mvvm/presentation/register/register.dart';
 import 'package:udemy_flutter_mvvm/presentation/forgot_password/forgot_password.dart';
@@ -43,10 +44,10 @@ class RouteGenerator {
     return MaterialPageRoute(
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: const Text("No route found."),
+          title: const Text(AppStrings.noRouteFound),
         ),
         body: const Center(
-          child: Text("No route found."),
+          child: Text(AppStrings.noRouteFound),
         ),
       ),
     );
