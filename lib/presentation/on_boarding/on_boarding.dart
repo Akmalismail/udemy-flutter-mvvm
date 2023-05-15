@@ -55,7 +55,12 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               child: SvgPicture.asset(ImageAssets.leftArrowIcon),
             ),
             onTap: () {
-              // go to next slide
+              // go to previous slide
+              _pageController.animateToPage(
+                _getPreviousIndex(),
+                duration: const Duration(milliseconds: DurationConstant.d300),
+                curve: Curves.bounceInOut,
+              );
             },
           ),
         ),
@@ -82,6 +87,11 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             ),
             onTap: () {
               // go to next slide
+              _pageController.animateToPage(
+                _getNextIndex(),
+                duration: const Duration(milliseconds: DurationConstant.d300),
+                curve: Curves.bounceInOut,
+              );
             },
           ),
         ),
@@ -97,6 +107,22 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       // unselected slider
       return SvgPicture.asset(ImageAssets.solidCircleIcon);
     }
+  }
+
+  int _getPreviousIndex() {
+    int previousIndex = _currentIndex--;
+    if (previousIndex == -1) {
+      _currentIndex = _list.length - 1;
+    }
+    return _currentIndex;
+  }
+
+  int _getNextIndex() {
+    int nextIndex = _currentIndex++;
+    if (nextIndex >= _list.length) {
+      _currentIndex = 0;
+    }
+    return _currentIndex;
   }
 
   @override
