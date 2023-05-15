@@ -13,13 +13,16 @@ ThemeData getApplicationTheme() {
     disabledColor: ColorManager.grey1, // for cases like disabled button
     splashColor: ColorManager.primaryOpacity70, // ripple color
     colorScheme: ColorScheme.fromSeed(
-        seedColor: ColorManager.primary, secondary: ColorManager.grey),
+      seedColor: ColorManager.primary,
+      secondary: ColorManager.grey,
+    ),
 
     // card view theme
     cardTheme: CardTheme(
-        color: ColorManager.white,
-        shadowColor: ColorManager.grey,
-        elevation: AppSize.s4),
+      color: ColorManager.white,
+      shadowColor: ColorManager.grey,
+      elevation: AppSize.s4,
+    ),
 
     // app bar theme
     appBarTheme: AppBarTheme(
@@ -27,10 +30,29 @@ ThemeData getApplicationTheme() {
         color: ColorManager.primary,
         elevation: AppSize.s4,
         shadowColor: ColorManager.primaryOpacity70,
-        titleTextStyle:
-            getRegularStyle(color: ColorManager.white, fontSize: FontSize.s16)),
+        titleTextStyle: getRegularStyle(
+          color: ColorManager.white,
+          fontSize: FontSize.s16,
+        )),
 
     // button theme
+    buttonTheme: ButtonThemeData(
+      shape: const StadiumBorder(),
+      disabledColor: ColorManager.grey1,
+      buttonColor: ColorManager.primary,
+      splashColor: ColorManager.primaryOpacity70,
+    ),
+
+    // elevated button theme
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        textStyle: getRegularStyle(color: ColorManager.white),
+        backgroundColor: ColorManager.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppSize.s12),
+        ),
+      ),
+    ),
 
     // text theme
 
