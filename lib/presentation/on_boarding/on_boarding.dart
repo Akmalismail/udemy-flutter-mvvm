@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter_mvvm/domain/model.dart';
+import 'package:udemy_flutter_mvvm/presentation/on_boarding/on_boarding_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/assets_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/color_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/routes_manager.dart';
@@ -17,6 +18,17 @@ class OnBoardingView extends StatefulWidget {
 
 class _OnBoardingViewState extends State<OnBoardingView> {
   final PageController _pageController = PageController(initialPage: 0);
+  OnBoardingViewModel _viewModel = OnBoardingViewModel();
+
+  _bind() {
+    _viewModel.start();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _bind();
+  }
 
   Widget _getBottomSheetWidget() {
     return Container(
@@ -89,30 +101,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     }
   }
 
-  int _getPreviousIndex() {
-    _currentIndex--;
-    if (_currentIndex == -1) {
-      _currentIndex = _list.length - 1;
-    }
-    return _currentIndex;
-  }
-
-  int _getNextIndex() {
-    _currentIndex++;
-    if (_currentIndex >= _list.length) {
-      _currentIndex = 0;
-    }
-    return _currentIndex;
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement viewModel.dispose()
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _getContentWidget() {
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
@@ -159,6 +148,17 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _getContentWidget();
   }
 }
 
