@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/assets_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/color_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
@@ -45,6 +46,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     return Scaffold(
       backgroundColor: ColorManager.white,
       appBar: AppBar(
+        backgroundColor: ColorManager.white,
         elevation: AppSize.s1_5,
         systemOverlayStyle: SystemUiOverlayStyle(
           statusBarColor: ColorManager.white,
@@ -61,8 +63,26 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           });
         },
         itemBuilder: (context, index) {
-          // return onBoardingPage
+          return OnBoardingPage(_list[index]);
         },
+      ),
+      bottomSheet: Container(
+        color: ColorManager.white,
+        height: AppSize.s100,
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {},
+                child: const Text(
+                  AppStrings.skip,
+                  textAlign: TextAlign.end,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -96,6 +116,7 @@ class OnBoardingPage extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSize.s60),
+        SvgPicture.asset(_sliderObject.image),
       ],
     );
   }
