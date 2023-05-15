@@ -41,6 +41,64 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         ),
       ];
 
+  Widget _getBottomSheetWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        // left arrow
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: GestureDetector(
+            child: SizedBox(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              child: SvgPicture.asset(ImageAssets.leftArrowIcon),
+            ),
+            onTap: () {
+              // go to next slide
+            },
+          ),
+        ),
+
+        // circles indicator
+        Row(
+          children: [
+            for (int i = 0; i < _list.length; i++)
+              Padding(
+                padding: const EdgeInsets.all(AppPadding.p8),
+                child: _getProperCircle(i),
+              )
+          ],
+        ),
+
+        // right arrow
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: GestureDetector(
+            child: SizedBox(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              child: SvgPicture.asset(ImageAssets.rightArrowIcon),
+            ),
+            onTap: () {
+              // go to next slide
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _getProperCircle(int index) {
+    if (index == _currentIndex) {
+      // selected slider
+      return SvgPicture.asset(ImageAssets.hollowCircleIcon);
+    } else {
+      // unselected slider
+      return SvgPicture.asset(ImageAssets.solidCircleIcon);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
