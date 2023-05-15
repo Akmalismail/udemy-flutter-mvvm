@@ -27,21 +27,21 @@ class OnBoardingViewModel extends BaseViewModel
   }
 
   @override
-  void goNext() {
+  int goNext() {
     _currentIndex++;
     if (_currentIndex >= _list.length) {
       _currentIndex = 0;
     }
-    _postDataToView();
+    return _currentIndex;
   }
 
   @override
-  void goPrevious() {
+  int goPrevious() {
     _currentIndex--;
     if (_currentIndex == -1) {
       _currentIndex = _list.length - 1;
     }
-    _postDataToView();
+    return _currentIndex;
   }
 
   @override
