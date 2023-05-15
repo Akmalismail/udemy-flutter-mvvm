@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_mvvm/presentation/resources/routes_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/theme_manager.dart';
 
 // ignore: must_be_immutable
@@ -25,6 +26,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: RouteGenerator.getRoute,
+      initialRoute: Routes.splashRoute,
       theme: getApplicationTheme(),
     );
   }
