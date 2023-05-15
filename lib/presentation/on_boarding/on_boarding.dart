@@ -106,24 +106,24 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   Widget _getProperCircle(int index) {
     if (index == _currentIndex) {
       // selected slider
-      return SvgPicture.asset(ImageAssets.hollowCircleIcon);
+      return SvgPicture.asset(ImageAssets.solidCircleIcon);
     } else {
       // unselected slider
-      return SvgPicture.asset(ImageAssets.solidCircleIcon);
+      return SvgPicture.asset(ImageAssets.hollowCircleIcon);
     }
   }
 
   int _getPreviousIndex() {
-    int previousIndex = _currentIndex--;
-    if (previousIndex == -1) {
+    _currentIndex--;
+    if (_currentIndex == -1) {
       _currentIndex = _list.length - 1;
     }
     return _currentIndex;
   }
 
   int _getNextIndex() {
-    int nextIndex = _currentIndex++;
-    if (nextIndex >= _list.length) {
+    _currentIndex++;
+    if (_currentIndex >= _list.length) {
       _currentIndex = 0;
     }
     return _currentIndex;
