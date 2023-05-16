@@ -24,12 +24,6 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     _viewModel.start();
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _bind();
-  }
-
   Widget _getBottomSheetWidget(SliderViewObject sliderViewObject) {
     return Container(
       color: ColorManager.primary,
@@ -50,7 +44,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 _pageController.animateToPage(
                   _viewModel.goPrevious(),
                   duration: const Duration(milliseconds: DurationConstant.d300),
-                  curve: Curves.bounceInOut,
+                  curve: Curves.easeInOut,
                 );
               },
             ),
@@ -150,6 +144,12 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         ),
       );
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _bind();
   }
 
   @override

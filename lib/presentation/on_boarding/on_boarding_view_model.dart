@@ -12,11 +12,16 @@ class OnBoardingViewModel extends BaseViewModel
       StreamController<SliderViewObject>();
 
   late final List<SliderObject> _list;
+  late final Stream<SliderViewObject> stream;
   int _currentIndex = 0;
 
   @override
   void start() {
+    stream = _streamController.stream.map(
+      (sliderViewObject) => sliderViewObject,
+    );
     _list = _getSliderData();
+
     // send this slider data to view
     _postDataToView();
   }
@@ -54,10 +59,7 @@ class OnBoardingViewModel extends BaseViewModel
   Sink get inputSliderViewObject => _streamController.sink;
 
   @override
-  Stream<SliderViewObject> get outputSliderViewObject =>
-      _streamController.stream.map(
-        (slideViewObject) => slideViewObject,
-      );
+  Stream<SliderViewObject> get outputSliderViewObject => stream;
 
   // private functions
   List<SliderObject> _getSliderData() => [
