@@ -123,7 +123,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             _viewModel.onPageChanged(index);
           },
           itemBuilder: (context, index) {
-            return OnBoardingPage(sliderViewObject.sliderObject);
+            return OnBoardingPage(sliderViewObject.list[index]);
           },
         ),
         bottomSheet: Container(
