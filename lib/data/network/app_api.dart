@@ -5,7 +5,7 @@ import 'package:udemy_flutter_mvvm/data/responses/responses.dart';
 
 part 'app_api.g.dart';
 
-@RestApi(baseUrl: Constancts.baseUrl)
+@RestApi(baseUrl: Constants.baseUrl)
 abstract class AppServiceClient {
   factory AppServiceClient(Dio dio, {String baseUrl}) = _AppServiceClient;
 
