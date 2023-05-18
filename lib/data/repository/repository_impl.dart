@@ -34,7 +34,9 @@ class RepositoryImpl extends Repository {
     if (response.status != 200) {
       return Left(
         Failure(
-            response.status ?? 0, response.message ?? "Backend returned error"),
+          response.status ?? 0,
+          response.message ?? "Backend returned error",
+        ),
       );
     }
 
