@@ -33,3 +33,25 @@ class ResponseCode {
   static const int cacheError = -6;
   static const int noInternetConnection = -7;
 }
+
+class ResponseMessage {
+  // http status codes.
+  static const String success = 'Success.';
+  static const String noContent = 'Success with no content.';
+  static const String badRequest = 'Bad request. Please try again later.';
+  static const String forbidden = 'Forbidden request.';
+  static const String unauthorized = 'User is not authorised.';
+  static const String notFound = 'URL not found.';
+  static const String internalServerError =
+      'Something went wrong server side. Please try again later.';
+
+  // local status codes.
+  static const String unknown = 'Something went wrong. Please try again later.';
+  static const String connectTimeout = 'Connection timed out.';
+  static const String cancel = 'Request was cancelled.';
+  static const String receiveTimeout = 'Request was timed out.';
+  static const String sendTimeout = 'Request was timed out.';
+  static const String cacheError = 'Cache error. Please try again later.';
+  static const String noInternetConnection =
+      'Please check your internet connection.';
+}
