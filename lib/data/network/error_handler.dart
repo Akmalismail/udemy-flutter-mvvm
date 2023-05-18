@@ -274,3 +274,8 @@ class ResponseMessage {
   static const String connectionError = 'Connection error.';
   static const String badCertificate = 'Bad certificate.';
 }
+
+class ApiInternalStatus {
+  static const int success = 0;
+  static const int failure = -1;
+}

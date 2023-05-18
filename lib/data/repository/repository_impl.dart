@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:udemy_flutter_mvvm/data/data_source/remote_data_source.dart';
 import 'package:udemy_flutter_mvvm/data/mapper/mapper.dart';
+import 'package:udemy_flutter_mvvm/data/network/error_handler.dart';
 import 'package:udemy_flutter_mvvm/data/network/failure.dart';
 import 'package:udemy_flutter_mvvm/data/network/network_info.dart';
 import 'package:udemy_flutter_mvvm/data/request/request.dart';
@@ -19,28 +20,27 @@ class RepositoryImpl extends Repository {
   ) async {
     // no network
     if (!await _networkInfo.isConnected) {
-      return Left(
-        Failure(
-          0,
-          "Please check your internet connection",
-        ),
-      );
+      return Left(HttpStatus.noInternetConnection.failure);
     }
 
-    // request
-    final response = await _remoteDataSource.login(loginRequest);
+    try {
+      // request
+      final response = await _remoteDataSource.login(loginRequest);
 
-    // http error
-    if (response.status != 200) {
-      return Left(
-        Failure(
-          response.status ?? 0,
-          response.message ?? "Backend returned error",
-        ),
-      );
+      // http error
+      if (response.status != ApiInternalStatus.success) {
+        return Left(
+          Failure(
+            response.status ?? ApiInternalStatus.failure,
+            response.message ?? HttpStatus.unknown.message,
+          ),
+        );
+      }
+
+      // success
+      return Right(response.toDomain());
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
     }
-
-    // success
-    return Right(response.toDomain());
   }
 }
