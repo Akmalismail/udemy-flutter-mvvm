@@ -8,6 +8,13 @@ class BaseResponse {
   int? status;
   @JsonKey(name: "message")
   String? message;
+
+  BaseResponse(this.status, this.message);
+
+  factory BaseResponse.fromJson(Map<String, dynamic> json) =>
+      _$BaseResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$BaseResponseToJson(this);
 }
 
 @JsonSerializable()
@@ -51,11 +58,14 @@ class AuthenticationResponse extends BaseResponse {
   @JsonKey(name: "contact")
   ContactResponse? contact;
 
-  AuthenticationResponse(this.customer, this.contact);
+  AuthenticationResponse(status, message, this.customer, this.contact)
+      : super(status, message);
 
   // from json
-  factory AuthenticationResponse.fromJson(Map<String, dynamic> json) =>
-      _$AuthenticationResponseFromJson(json);
+  factory AuthenticationResponse.fromJson(Map<String, dynamic> json) {
+    return _$AuthenticationResponseFromJson(json);
+  }
   // to json
+  @override
   Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
 }
