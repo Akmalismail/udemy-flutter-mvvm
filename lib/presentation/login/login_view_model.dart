@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:logger/logger.dart';
+import 'package:udemy_flutter_mvvm/domain/use_case/login_use_case.dart';
 import 'package:udemy_flutter_mvvm/presentation/base/base_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/common/freezed_data_classes.dart';
 
@@ -10,10 +12,13 @@ class LoginViewModel extends BaseViewModel
   final StreamController _passwordStreamController =
       StreamController<String>.broadcast();
 
-  var loginCredentials = LoginCredentials(
+  var loginCredentials = const LoginCredentials(
     username: "",
     password: "",
   );
+
+  LoginUseCase _loginUseCase;
+  LoginViewModel(this._loginUseCase);
 
   // inputs
   @override
@@ -37,9 +42,25 @@ class LoginViewModel extends BaseViewModel
   Sink get inputUsername => _usernameStreamController.sink;
 
   @override
-  login() {
-    // TODO: implement login
-    throw UnimplementedError();
+  login() async {
+    Logger logger = Logger();
+    final response = await _loginUseCase.execute(
+      LoginUseCaseInput(
+        loginCredentials.username,
+        loginCredentials.password,
+      ),
+    );
+
+    response.fold(
+      (failure) => {
+        // left > failure
+        logger.d(failure.message)
+      },
+      (data) => {
+        // right > success (data)
+        logger.d(data)
+      },
+    );
   }
 
   @override
