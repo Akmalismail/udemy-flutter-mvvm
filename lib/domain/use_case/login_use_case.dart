@@ -7,7 +7,7 @@ import 'package:udemy_flutter_mvvm/domain/respository/repository.dart';
 import 'package:udemy_flutter_mvvm/domain/use_case/base_use_case.dart';
 
 class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication> {
-  Repository _repository;
+  final Repository _repository;
   LoginUseCase(this._repository);
 
   @override

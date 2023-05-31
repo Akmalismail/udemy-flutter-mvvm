@@ -17,7 +17,8 @@ class LoginViewModel extends BaseViewModel
     password: "",
   );
 
-  LoginUseCase _loginUseCase;
+  // TODO: remove
+  final LoginUseCase _loginUseCase;
   LoginViewModel(this._loginUseCase);
 
   // inputs
