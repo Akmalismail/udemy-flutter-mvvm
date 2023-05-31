@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:udemy_flutter_mvvm/domain/model.dart';
+import 'package:udemy_flutter_mvvm/domain/model/model.dart';
 import 'package:udemy_flutter_mvvm/presentation/on_boarding/on_boarding_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/assets_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/color_manager.dart';

@@ -5,8 +5,8 @@ import 'package:udemy_flutter_mvvm/data/network/error_handler.dart';
 import 'package:udemy_flutter_mvvm/data/network/failure.dart';
 import 'package:udemy_flutter_mvvm/data/network/network_info.dart';
 import 'package:udemy_flutter_mvvm/data/request/request.dart';
-import 'package:udemy_flutter_mvvm/domain/model.dart';
-import 'package:udemy_flutter_mvvm/domain/repository.dart';
+import 'package:udemy_flutter_mvvm/domain/model/model.dart';
+import 'package:udemy_flutter_mvvm/domain/respository/repository.dart';
 
 class RepositoryImpl extends Repository {
   final RemoteDataSource _remoteDataSource;

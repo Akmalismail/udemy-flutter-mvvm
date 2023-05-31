@@ -1,7 +1,7 @@
 // mapper - convert response to non nullable object (model)
 
 import 'package:udemy_flutter_mvvm/data/responses/responses.dart';
-import 'package:udemy_flutter_mvvm/domain/model.dart';
+import 'package:udemy_flutter_mvvm/domain/model/model.dart';
 
 const empty = '';
 const zero = 0;

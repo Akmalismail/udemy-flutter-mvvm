@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:udemy_flutter_mvvm/domain/model.dart';
+import 'package:udemy_flutter_mvvm/domain/model/model.dart';
 import 'package:udemy_flutter_mvvm/presentation/base/base_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/assets_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
