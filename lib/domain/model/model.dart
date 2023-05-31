@@ -28,3 +28,15 @@ class Authentication {
 
   Authentication(this.customer, this.contact);
 }
+
+class DeviceInfo {
+  final String name;
+  final String identifier;
+  final String version;
+
+  const DeviceInfo(
+    this.name,
+    this.identifier,
+    this.version,
+  );
+}
