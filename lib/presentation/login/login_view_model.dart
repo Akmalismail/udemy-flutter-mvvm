@@ -19,7 +19,7 @@ class LoginViewModel extends BaseViewModel
     password: "",
   );
 
-  final LoginUseCase? _loginUseCase;
+  final LoginUseCase _loginUseCase;
   LoginViewModel(this._loginUseCase);
 
   // inputs
@@ -45,14 +45,14 @@ class LoginViewModel extends BaseViewModel
   @override
   login() async {
     Logger logger = Logger();
-    final response = await _loginUseCase?.execute(
+    final response = await _loginUseCase.execute(
       LoginUseCaseInput(
         loginCredentials.username,
         loginCredentials.password,
       ),
     );
 
-    response?.fold(
+    response.fold(
       (failure) => {
         // left > failure
         logger.d(failure.message)
