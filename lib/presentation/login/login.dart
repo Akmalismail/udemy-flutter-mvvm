@@ -4,6 +4,7 @@ import 'package:udemy_flutter_mvvm/domain/use_case/login_use_case.dart';
 import 'package:udemy_flutter_mvvm/presentation/login/login_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/assets_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/color_manager.dart';
+import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/values_manager.dart';
 
 class LoginView extends StatefulWidget {
@@ -17,7 +18,7 @@ class _LoginViewState extends State<LoginView> {
   // TODO: loginUseCase
   final LoginViewModel _viewModel = LoginViewModel({} as LoginUseCase);
   final TextEditingController _usernameController = TextEditingController();
-  // final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   _bind() {
@@ -64,6 +65,35 @@ class _LoginViewState extends State<LoginView> {
                       return TextFormField(
                         keyboardType: TextInputType.emailAddress,
                         controller: _usernameController,
+                        decoration: InputDecoration(
+                          hintText: AppStrings.username,
+                          labelText: AppStrings.username,
+                          errorText: (snapshot.data ?? true)
+                              ? null
+                              : AppStrings.usernameError,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: AppPadding.p28,
+                    right: AppPadding.p28,
+                  ),
+                  child: StreamBuilder<bool>(
+                    stream: _viewModel.outputIsPasswordValid,
+                    builder: (context, snapshot) {
+                      return TextFormField(
+                        keyboardType: TextInputType.visiblePassword,
+                        controller: _passwordController,
+                        decoration: InputDecoration(
+                          hintText: AppStrings.password,
+                          labelText: AppStrings.password,
+                          errorText: (snapshot.data ?? true)
+                              ? null
+                              : AppStrings.passwordError,
+                        ),
                       );
                     },
                   ),
