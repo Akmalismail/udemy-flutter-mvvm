@@ -19,8 +19,7 @@ class LoginViewModel extends BaseViewModel
     password: "",
   );
 
-  // TODO: remove
-  final LoginUseCase _loginUseCase;
+  final LoginUseCase? _loginUseCase;
   LoginViewModel(this._loginUseCase);
 
   // inputs
@@ -32,10 +31,7 @@ class LoginViewModel extends BaseViewModel
   }
 
   @override
-  void start() {
-    // TODO: implement start
-    throw UnimplementedError();
-  }
+  void start() {}
 
   @override
   Sink get inputPassword => _passwordStreamController.sink;
@@ -49,14 +45,14 @@ class LoginViewModel extends BaseViewModel
   @override
   login() async {
     Logger logger = Logger();
-    final response = await _loginUseCase.execute(
+    final response = await _loginUseCase?.execute(
       LoginUseCaseInput(
         loginCredentials.username,
         loginCredentials.password,
       ),
     );
 
-    response.fold(
+    response?.fold(
       (failure) => {
         // left > failure
         logger.d(failure.message)

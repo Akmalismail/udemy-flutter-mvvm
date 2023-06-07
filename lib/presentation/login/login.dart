@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:udemy_flutter_mvvm/domain/use_case/login_use_case.dart';
 import 'package:udemy_flutter_mvvm/presentation/login/login_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/assets_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/color_manager.dart';
@@ -15,20 +13,19 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  // TODO: loginUseCase
-  final LoginViewModel _viewModel = LoginViewModel({} as LoginUseCase);
+  final LoginViewModel _viewModel = LoginViewModel(null);
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   _bind() {
-    // _viewModel.start();
-    // _usernameController.addListener(
-    //   () => _viewModel.setUsername(_usernameController.text),
-    // );
-    // _passwordController.addListener(
-    //   () => _viewModel.setPassword(_passwordController.text),
-    // );
+    _viewModel.start();
+    _usernameController.addListener(
+      () => _viewModel.setUsername(_usernameController.text),
+    );
+    _passwordController.addListener(
+      () => _viewModel.setPassword(_passwordController.text),
+    );
   }
 
   @override
@@ -46,13 +43,13 @@ class _LoginViewState extends State<LoginView> {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(top: AppPadding.p100),
-        color: ColorManager.white,
+        color: ColorManager.darkGrey,
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-                SvgPicture.asset(ImageAssets.loginIcon),
+                Image.asset(ImageAssets.splashLogo),
                 const SizedBox(height: AppSize.s28),
                 Padding(
                   padding: const EdgeInsets.only(
@@ -76,6 +73,7 @@ class _LoginViewState extends State<LoginView> {
                     },
                   ),
                 ),
+                const SizedBox(height: AppSize.s28),
                 Padding(
                   padding: const EdgeInsets.only(
                     left: AppPadding.p28,
