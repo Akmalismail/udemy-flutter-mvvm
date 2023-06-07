@@ -12,4 +12,5 @@ class ImageAssets {
   static const String leftArrowIcon = '$imagePath/left_arrow_ic.svg';
   static const String rightArrowIcon = '$imagePath/right_arrow_ic.svg';
   static const String solidCircleIcon = '$imagePath/solid_circle_ic.svg';
+  static const String loginIcon = '$imagePath/login_ic.svg';
 }
