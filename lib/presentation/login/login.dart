@@ -97,7 +97,22 @@ class _LoginViewState extends State<LoginView> {
                       );
                     },
                   ),
-                )
+                ),
+                const SizedBox(height: AppSize.s28),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: AppPadding.p28,
+                    right: AppPadding.p28,
+                  ),
+                  child: StreamBuilder(
+                      stream: null,
+                      builder: (context, snapshot) {
+                        return ElevatedButton(
+                          child: const Text(AppStrings.login),
+                          onPressed: () {},
+                        );
+                      }),
+                ),
               ],
             ),
           ),
