@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_mvvm/app/di.dart';
 import 'package:udemy_flutter_mvvm/presentation/login/login.dart';
 import 'package:udemy_flutter_mvvm/presentation/on_boarding/on_boarding.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
@@ -26,6 +27,7 @@ class RouteGenerator {
       case Routes.onBoardingRoute:
         return MaterialPageRoute(builder: (_) => const OnBoardingView());
       case Routes.loginRoute:
+        initLoginModule();
         return MaterialPageRoute(builder: (_) => const LoginView());
       case Routes.registerRoute:
         return MaterialPageRoute(builder: (_) => const RegisterView());

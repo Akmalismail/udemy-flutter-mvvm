@@ -7,6 +7,8 @@ import 'package:udemy_flutter_mvvm/data/network/app_api.dart';
 import 'package:udemy_flutter_mvvm/data/network/dio_factory.dart';
 import 'package:udemy_flutter_mvvm/data/network/network_info.dart';
 import 'package:udemy_flutter_mvvm/data/repository/repository_impl.dart';
+import 'package:udemy_flutter_mvvm/domain/use_case/login_use_case.dart';
+import 'package:udemy_flutter_mvvm/presentation/login/login_view_model.dart';
 
 final instance = GetIt.instance;
 
@@ -47,5 +49,18 @@ Future<void> initAppModule() async {
   // repository
   instance.registerLazySingleton<RepositoryImpl>(
     () => RepositoryImpl(instance(), instance()),
+  );
+}
+
+initLoginModule() {
+  if (GetIt.I.isRegistered<LoginUseCase>()) {
+    return;
+  }
+
+  instance.registerFactory<LoginUseCase>(
+    () => LoginUseCase(instance()),
+  );
+  instance.registerFactory<LoginViewModel>(
+    () => LoginViewModel(instance()),
   );
 }
