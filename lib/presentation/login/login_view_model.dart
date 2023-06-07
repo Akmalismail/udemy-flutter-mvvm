@@ -19,7 +19,7 @@ class LoginViewModel extends BaseViewModel
     password: "",
   );
 
-  final LoginUseCase? _loginUseCase;
+  final LoginUseCase _loginUseCase;
   LoginViewModel(this._loginUseCase);
 
   // inputs
