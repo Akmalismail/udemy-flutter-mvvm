@@ -55,11 +55,11 @@ class LoginViewModel extends BaseViewModel
     response.fold(
       (failure) => {
         // left > failure
-        logger.d(failure.message)
+        logger.e('${failure.code}: ${failure.message}')
       },
       (data) => {
         // right > success (data)
-        logger.d(data)
+        logger.i(data)
       },
     );
   }

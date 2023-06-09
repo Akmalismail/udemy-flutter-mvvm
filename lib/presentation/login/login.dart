@@ -45,9 +45,12 @@ class _LoginViewState extends State<LoginView> {
   Widget _getContentWidget() {
     return Scaffold(
       backgroundColor: ColorManager.white,
-      body: Container(
-        padding: const EdgeInsets.only(top: AppPadding.p100),
+      body: Center(
         child: SingleChildScrollView(
+          padding: const EdgeInsets.only(
+            top: AppPadding.p12,
+            bottom: AppPadding.p12,
+          ),
           child: Form(
             key: _formKey,
             child: Column(
@@ -114,6 +117,8 @@ class _LoginViewState extends State<LoginView> {
                           child: ElevatedButton(
                             onPressed: (snapshot.data ?? false)
                                 ? () {
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
                                     _viewModel.login();
                                   }
                                 : null,
@@ -131,28 +136,35 @@ class _LoginViewState extends State<LoginView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            Routes.forgotPasswordRoute,
-                          );
-                        },
-                        child: Text(
-                          AppStrings.forgetPassword,
-                          style: Theme.of(context).textTheme.titleSmall,
+                      Flexible(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              Routes.forgotPasswordRoute,
+                            );
+                          },
+                          child: Text(
+                            AppStrings.forgetPassword,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
                         ),
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            Routes.registerRoute,
-                          );
-                        },
-                        child: Text(
-                          AppStrings.registerText,
-                          style: Theme.of(context).textTheme.titleSmall,
+                      Flexible(
+                        child: Align(
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pushReplacementNamed(
+                                context,
+                                Routes.registerRoute,
+                              );
+                            },
+                            child: Text(
+                              AppStrings.registerText,
+                              style: Theme.of(context).textTheme.titleSmall,
+                              textAlign: TextAlign.right,
+                            ),
+                          ),
                         ),
                       ),
                     ],

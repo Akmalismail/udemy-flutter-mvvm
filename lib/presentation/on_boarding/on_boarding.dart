@@ -24,63 +24,89 @@ class _OnBoardingViewState extends State<OnBoardingView> {
     _viewModel.start();
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _bind();
+  }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<SliderViewObject>(
+      stream: _viewModel.outputSliderViewObject,
+      builder: (context, snapshot) {
+        return _getContentWidget(snapshot.data);
+      },
+    );
+  }
+
   Widget _getBottomSheetWidget(SliderViewObject sliderViewObject) {
-    return Container(
-      color: ColorManager.primary,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          // left arrow
-          Padding(
-            padding: const EdgeInsets.all(AppPadding.p14),
-            child: GestureDetector(
-              child: SizedBox(
-                height: AppSize.s20,
-                width: AppSize.s20,
-                child: SvgPicture.asset(ImageAssets.leftArrowIcon),
+    return Expanded(
+      child: Container(
+        color: ColorManager.primary,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            // left arrow
+            Padding(
+              padding: const EdgeInsets.all(AppPadding.p14),
+              child: GestureDetector(
+                child: SizedBox(
+                  height: AppSize.s20,
+                  width: AppSize.s20,
+                  child: SvgPicture.asset(ImageAssets.leftArrowIcon),
+                ),
+                onTap: () {
+                  // go to previous slide
+                  _pageController.animateToPage(
+                    _viewModel.goPrevious(),
+                    duration:
+                        const Duration(milliseconds: DurationConstant.d300),
+                    curve: Curves.easeInOut,
+                  );
+                },
               ),
-              onTap: () {
-                // go to previous slide
-                _pageController.animateToPage(
-                  _viewModel.goPrevious(),
-                  duration: const Duration(milliseconds: DurationConstant.d300),
-                  curve: Curves.easeInOut,
-                );
-              },
             ),
-          ),
 
-          // circles indicator
-          Row(
-            children: [
-              for (int i = 0; i < sliderViewObject.numberOfSlides; i++)
-                Padding(
-                  padding: const EdgeInsets.all(AppPadding.p8),
-                  child: _getProperCircle(i, sliderViewObject.currentIndex),
-                )
-            ],
-          ),
+            // circles indicator
+            Row(
+              children: [
+                for (int i = 0; i < sliderViewObject.numberOfSlides; i++)
+                  Padding(
+                    padding: const EdgeInsets.all(AppPadding.p8),
+                    child: _getProperCircle(i, sliderViewObject.currentIndex),
+                  )
+              ],
+            ),
 
-          // right arrow
-          Padding(
-            padding: const EdgeInsets.all(AppPadding.p14),
-            child: GestureDetector(
-              child: SizedBox(
-                height: AppSize.s20,
-                width: AppSize.s20,
-                child: SvgPicture.asset(ImageAssets.rightArrowIcon),
+            // right arrow
+            Padding(
+              padding: const EdgeInsets.all(AppPadding.p14),
+              child: GestureDetector(
+                child: SizedBox(
+                  height: AppSize.s20,
+                  width: AppSize.s20,
+                  child: SvgPicture.asset(ImageAssets.rightArrowIcon),
+                ),
+                onTap: () {
+                  // go to next slide
+                  _pageController.animateToPage(
+                    _viewModel.goNext(),
+                    duration:
+                        const Duration(milliseconds: DurationConstant.d300),
+                    curve: Curves.easeInOut,
+                  );
+                },
               ),
-              onTap: () {
-                // go to next slide
-                _pageController.animateToPage(
-                  _viewModel.goNext(),
-                  duration: const Duration(milliseconds: DurationConstant.d300),
-                  curve: Curves.bounceInOut,
-                );
-              },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -120,7 +146,8 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             return OnBoardingPage(sliderViewObject.list[index]);
           },
         ),
-        bottomSheet: Container(
+        bottomSheet: BottomAppBar(
+          elevation: AppSize.s0,
           color: ColorManager.white,
           height: AppSize.s100,
           child: Column(
@@ -144,28 +171,6 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         ),
       );
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _bind();
-  }
-
-  @override
-  void dispose() {
-    _viewModel.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return StreamBuilder<SliderViewObject>(
-      stream: _viewModel.outputSliderViewObject,
-      builder: (context, snapshot) {
-        return _getContentWidget(snapshot.data);
-      },
-    );
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 import 'package:udemy_flutter_mvvm/data/network/failure.dart';
 
 enum HttpStatus {
@@ -80,23 +81,6 @@ enum HttpStatus {
   }
 }
 
-// enum DataSource {
-//   success,
-//   noContent,
-//   badRequest,
-//   forbidden,
-//   unauthorized,
-//   notFound,
-//   internalServerError,
-//   unknown,
-//   connectTimeout,
-//   cancel,
-//   receiveTimeout,
-//   sendTimeout,
-//   cacheError,
-//   noInternetConnection,
-// }
-
 class ErrorHandler implements Exception {
   late Failure failure;
 
@@ -157,77 +141,13 @@ class ErrorHandler implements Exception {
         break;
     }
 
+    if (status == HttpStatus.unknown) {
+      Logger().e(error);
+    }
+
     return status.failure;
   }
 }
-
-// extension DataSourceExtension on DataSource {
-//   Failure getFailure() {
-//     switch (this) {
-//       case DataSource.badRequest:
-//         return Failure(
-//           ResponseCode.badRequest,
-//           ResponseMessage.badRequest,
-//         );
-//       case DataSource.forbidden:
-//         return Failure(
-//           ResponseCode.forbidden,
-//           ResponseMessage.forbidden,
-//         );
-//       case DataSource.unauthorized:
-//         return Failure(
-//           ResponseCode.unauthorized,
-//           ResponseMessage.unauthorized,
-//         );
-//       case DataSource.notFound:
-//         return Failure(
-//           ResponseCode.notFound,
-//           ResponseMessage.notFound,
-//         );
-//       case DataSource.internalServerError:
-//         return Failure(
-//           ResponseCode.internalServerError,
-//           ResponseMessage.internalServerError,
-//         );
-//       case DataSource.connectTimeout:
-//         return Failure(
-//           ResponseCode.connectionTimeout,
-//           ResponseMessage.connectionTimeout,
-//         );
-//       case DataSource.cancel:
-//         return Failure(
-//           ResponseCode.cancel,
-//           ResponseMessage.cancel,
-//         );
-//       case DataSource.receiveTimeout:
-//         return Failure(
-//           ResponseCode.receiveTimeout,
-//           ResponseMessage.receiveTimeout,
-//         );
-//       case DataSource.sendTimeout:
-//         return Failure(
-//           ResponseCode.sendTimeout,
-//           ResponseMessage.sendTimeout,
-//         );
-//       case DataSource.cacheError:
-//         return Failure(
-//           ResponseCode.cacheError,
-//           ResponseMessage.cacheError,
-//         );
-//       case DataSource.noInternetConnection:
-//         return Failure(
-//           ResponseCode.noInternetConnection,
-//           ResponseMessage.noInternetConnection,
-//         );
-//       case DataSource.unknown:
-//       default:
-//         return Failure(
-//           ResponseCode.unknown,
-//           ResponseMessage.unknown,
-//         );
-//     }
-//   }
-// }
 
 class ResponseCode {
   // http status codes.
@@ -276,6 +196,6 @@ class ResponseMessage {
 }
 
 class ApiInternalStatus {
-  static const int success = 0;
+  static const int success = 200;
   static const int failure = -1;
 }

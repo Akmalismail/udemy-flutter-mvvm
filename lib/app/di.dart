@@ -7,6 +7,7 @@ import 'package:udemy_flutter_mvvm/data/network/app_api.dart';
 import 'package:udemy_flutter_mvvm/data/network/dio_factory.dart';
 import 'package:udemy_flutter_mvvm/data/network/network_info.dart';
 import 'package:udemy_flutter_mvvm/data/repository/repository_impl.dart';
+import 'package:udemy_flutter_mvvm/domain/respository/repository.dart';
 import 'package:udemy_flutter_mvvm/domain/use_case/login_use_case.dart';
 import 'package:udemy_flutter_mvvm/presentation/login/login_view_model.dart';
 
@@ -42,18 +43,18 @@ Future<void> initAppModule() async {
   );
 
   // remote data source
-  instance.registerLazySingleton<RemoteDataSourceImplementer>(
+  instance.registerLazySingleton<RemoteDataSource>(
     () => RemoteDataSourceImplementer(instance()),
   );
 
   // repository
-  instance.registerLazySingleton<RepositoryImpl>(
-    () => RepositoryImpl(instance(), instance()),
+  instance.registerLazySingleton<Repository>(
+    () => RepositoryImplementer(instance(), instance()),
   );
 }
 
-initLoginModule() {
-  if (GetIt.I.isRegistered<LoginUseCase>()) {
+initLoginModule() async {
+  if (instance.isRegistered<LoginUseCase>()) {
     return;
   }
 

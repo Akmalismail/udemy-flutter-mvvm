@@ -23,7 +23,7 @@ class DioFactory {
     Map<String, String> headers = {
       contentType: applicationJson,
       accept: applicationJson,
-      xApiKey: Constants.apiKey,
+      "x-api-key": Constants.apiKey,
       defaultLanguage: language,
     };
 
@@ -39,7 +39,9 @@ class DioFactory {
         PrettyDioLogger(
           requestHeader: true,
           requestBody: true,
+          responseBody: true,
           responseHeader: true,
+          error: true,
         ),
       );
     } else {

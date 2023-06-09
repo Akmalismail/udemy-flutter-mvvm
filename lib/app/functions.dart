@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
-import 'package:logger/logger.dart';
 import 'package:udemy_flutter_mvvm/domain/model/model.dart';
 
 Future<DeviceInfo> getDeviceDetails() async {
@@ -11,12 +10,6 @@ Future<DeviceInfo> getDeviceDetails() async {
   String version = "Unknown";
 
   DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
-
-  // testing out allInfo
-  final deviceInfo = await deviceInfoPlugin.deviceInfo;
-  final allInfo = deviceInfo.data;
-  Logger logger = Logger();
-  logger.d(allInfo);
 
   try {
     if (Platform.isAndroid) {

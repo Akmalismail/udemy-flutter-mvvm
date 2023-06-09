@@ -8,11 +8,11 @@ import 'package:udemy_flutter_mvvm/data/request/request.dart';
 import 'package:udemy_flutter_mvvm/domain/model/model.dart';
 import 'package:udemy_flutter_mvvm/domain/respository/repository.dart';
 
-class RepositoryImpl extends Repository {
+class RepositoryImplementer extends Repository {
   final RemoteDataSource _remoteDataSource;
   final NetworkInfo _networkInfo;
 
-  RepositoryImpl(this._remoteDataSource, this._networkInfo);
+  RepositoryImplementer(this._remoteDataSource, this._networkInfo);
 
   @override
   Future<Either<Failure, Authentication>> login(
