@@ -45,9 +45,15 @@ class StateRenderer extends StatelessWidget {
   Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.popupLoadingState:
-        return _getPopupDialog(context);
+        return _getPopupDialog(context, [
+          _getAnimatedImage(),
+        ]);
       case StateRendererType.popupErrorState:
-        return Container();
+        return _getPopupDialog(context, [
+          _getAnimatedImage(),
+          _getMessage(failure.message),
+          _getRetryButton(AppStrings.ok, context),
+        ]);
       case StateRendererType.fullscreenLoadingState:
         return _getItemsInColumn([
           _getAnimatedImage(),
@@ -63,6 +69,7 @@ class StateRenderer extends StatelessWidget {
           )
         ]);
       case StateRendererType.contentScreenState:
+        return Container();
       case StateRendererType.emptyScreenState:
         return _getItemsInColumn([
           _getAnimatedImage(),
@@ -73,7 +80,7 @@ class StateRenderer extends StatelessWidget {
     }
   }
 
-  Widget _getPopupDialog(BuildContext context) {
+  Widget _getPopupDialog(BuildContext context, List<Widget> children) {
     return Dialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(AppSize.s14),
@@ -93,13 +100,18 @@ class StateRenderer extends StatelessWidget {
             ),
           ],
         ),
-        child: _getDialogContent(context),
+        child: _getDialogContent(context, children),
       ),
     );
   }
 
-  Widget _getDialogContent(BuildContext context) {
-    return Container();
+  Widget _getDialogContent(BuildContext context, List<Widget> children) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: children,
+    );
   }
 
   Widget _getAnimatedImage() {
