@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:udemy_flutter_mvvm/data/network/failure.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/assets_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/color_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/font_manager.dart';
@@ -23,21 +22,18 @@ enum StateRendererType {
 
 class StateRenderer extends StatelessWidget {
   final StateRendererType stateRendererType;
-  final Failure failure;
   final String message;
   final String title;
   final Function? retryActionFunction;
 
-  StateRenderer({
+  const StateRenderer({
     super.key,
     required this.stateRendererType,
-    Failure? failure,
     String? message,
     String? title,
     this.retryActionFunction,
   })  : message = message ?? AppStrings.loading,
-        title = title ?? "",
-        failure = failure ?? DefaultFailure();
+        title = title ?? "";
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +49,7 @@ class StateRenderer extends StatelessWidget {
       case StateRendererType.popupErrorState:
         return _getPopupDialog(context, [
           _getAnimatedImage(JsonAssets.error),
-          _getMessage(failure.message),
+          _getMessage(message),
           _getRetryButton(AppStrings.ok, context),
         ]);
       case StateRendererType.fullscreenLoadingState:
@@ -64,7 +60,7 @@ class StateRenderer extends StatelessWidget {
       case StateRendererType.fullscreenErrorState:
         return _getItemsInColumn([
           _getAnimatedImage(JsonAssets.error),
-          _getMessage(failure.message),
+          _getMessage(message),
           _getRetryButton(
             AppStrings.retryAgain,
             context,
