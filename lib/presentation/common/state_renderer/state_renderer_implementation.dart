@@ -70,7 +70,23 @@ extension FlowStateExtension on FlowState {
       Function retryActionFunction) {
     switch (runtimeType) {
       case LoadingState:
-        break;
+        if (getStateRendererType() == StateRendererType.popupLoadingState) {
+          // show popup dialog
+          showPopup(
+            context,
+            getStateRendererType(),
+            getMessage(),
+          );
+          // return the content ui of the screen
+          return contentScreenWidget;
+        } else {
+          // StateRendererType.fullscreenLoadingState
+          return StateRenderer(
+            stateRendererType: getStateRendererType(),
+            message: getMessage(),
+            retryActionFunction: retryActionFunction,
+          );
+        }
       case ErrorState:
         break;
       case ContentState:
@@ -80,5 +96,19 @@ extension FlowStateExtension on FlowState {
       default:
         break;
     }
+  }
+
+  showPopup(BuildContext context, StateRendererType stateRendererType,
+      String message) {
+    WidgetsBinding.instance.addPersistentFrameCallback((_) {
+      showDialog(
+        context: context,
+        builder: (context) => StateRenderer(
+          stateRendererType: stateRendererType,
+          message: message,
+          retryActionFunction: () {},
+        ),
+      );
+    });
   }
 }
