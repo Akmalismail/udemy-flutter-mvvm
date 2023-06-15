@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:udemy_flutter_mvvm/data/mapper/mapper.dart';
 import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
@@ -62,4 +63,22 @@ class EmptyState extends FlowState {
   @override
   StateRendererType getStateRendererType() =>
       StateRendererType.emptyScreenState;
+}
+
+extension FlowStateExtension on FlowState {
+  Widget getScreenWidget(BuildContext context, Widget contentScreenWidget,
+      Function retryActionFunction) {
+    switch (runtimeType) {
+      case LoadingState:
+        break;
+      case ErrorState:
+        break;
+      case ContentState:
+        break;
+      case EmptyState:
+        break;
+      default:
+        break;
+    }
+  }
 }
