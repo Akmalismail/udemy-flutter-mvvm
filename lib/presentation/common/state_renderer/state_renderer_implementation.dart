@@ -106,6 +106,7 @@ extension FlowStateExtension on FlowState {
           );
         }
       case ContentState:
+        dismissDialog(context);
         return contentScreenWidget;
       case EmptyState:
         return StateRenderer(
@@ -118,7 +119,16 @@ extension FlowStateExtension on FlowState {
     }
   }
 
-  showPopup(BuildContext context, StateRendererType stateRendererType,
+  void dismissDialog(BuildContext context) {
+    if (_isThereCurrentDialogShowing(context)) {
+      Navigator.of(context, rootNavigator: true).pop();
+    }
+  }
+
+  bool _isThereCurrentDialogShowing(BuildContext context) =>
+      ModalRoute.of(context)?.isCurrent != true;
+
+  void showPopup(BuildContext context, StateRendererType stateRendererType,
       String message) {
     WidgetsBinding.instance.addPersistentFrameCallback((_) {
       showDialog(
