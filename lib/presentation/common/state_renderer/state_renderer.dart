@@ -24,7 +24,7 @@ class StateRenderer extends StatelessWidget {
   final Failure failure;
   final String message;
   final String title;
-  final Function retryActionFunction;
+  final Function? retryActionFunction;
 
   StateRenderer({
     super.key,
@@ -32,17 +32,17 @@ class StateRenderer extends StatelessWidget {
     Failure? failure,
     String? message,
     String? title,
-    required this.retryActionFunction,
+    this.retryActionFunction,
   })  : message = message ?? AppStrings.loading,
         title = title ?? "",
         failure = failure ?? DefaultFailure();
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return _getStateWidget(context);
   }
 
-  Widget _getStateWidget() {
+  Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.popupLoadingState:
       case StateRendererType.popupErrorState:
@@ -56,7 +56,10 @@ class StateRenderer extends StatelessWidget {
         return _getItemsInColumn([
           _getAnimatedImage(),
           _getMessage(failure.message),
-          _getRetryButton(AppStrings.retryAgain)
+          _getRetryButton(
+            AppStrings.retryAgain,
+            context,
+          )
         ]);
       case StateRendererType.contentScreenState:
       case StateRendererType.emptyScreenState:
@@ -74,19 +77,36 @@ class StateRenderer extends StatelessWidget {
   }
 
   Widget _getMessage(String message) {
-    return Text(
-      message,
-      style: getMediumStyle(
-        color: ColorManager.black,
-        fontSize: FontSize.s16,
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(AppPadding.p18),
+        child: Text(
+          message,
+          style: getMediumStyle(
+            color: ColorManager.black,
+            fontSize: FontSize.s16,
+          ),
+        ),
       ),
     );
   }
 
-  Widget _getRetryButton(String buttonTitle) {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text(buttonTitle),
+  Widget _getRetryButton(String buttonTitle, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(AppPadding.p18),
+      child: SizedBox(
+        width: AppSize.s180,
+        child: ElevatedButton(
+          onPressed: () {
+            if (stateRendererType == StateRendererType.fullscreenErrorState) {
+              retryActionFunction?.call();
+            } else {
+              Navigator.of(context).pop();
+            }
+          },
+          child: Text(buttonTitle),
+        ),
+      ),
     );
   }
 
