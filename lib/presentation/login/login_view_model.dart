@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:udemy_flutter_mvvm/domain/use_case/login_use_case.dart';
 import 'package:udemy_flutter_mvvm/presentation/base/base_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/common/freezed_data_classes.dart';
+import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer_implementation.dart';
 
 class LoginViewModel extends BaseViewModel
     with LoginViewModelInputs, LoginViewModelOutputs {
@@ -31,7 +32,10 @@ class LoginViewModel extends BaseViewModel
   }
 
   @override
-  void start() {}
+  void start() {
+    // view tells state renderer, please show the content of the screen.
+    inputState.add(ContentState());
+  }
 
   @override
   Sink get inputPassword => _passwordStreamController.sink;
