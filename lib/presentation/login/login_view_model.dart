@@ -15,6 +15,8 @@ class LoginViewModel extends BaseViewModel
       StreamController<String>.broadcast();
   final StreamController _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
+  final StreamController isUserLoggedInSuccessfullyStreamController =
+      StreamController<bool>();
 
   var loginCredentials = const LoginCredentials(
     username: "",
@@ -75,6 +77,7 @@ class LoginViewModel extends BaseViewModel
         inputState.add(ContentState());
 
         // navigate to main screen after the login
+        isUserLoggedInSuccessfullyStreamController.add(true);
       },
     );
   }
