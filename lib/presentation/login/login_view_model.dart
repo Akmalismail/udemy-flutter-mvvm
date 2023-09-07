@@ -4,6 +4,7 @@ import 'package:logger/logger.dart';
 import 'package:udemy_flutter_mvvm/domain/use_case/login_use_case.dart';
 import 'package:udemy_flutter_mvvm/presentation/base/base_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/common/freezed_data_classes.dart';
+import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer.dart';
 import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer_implementation.dart';
 
 class LoginViewModel extends BaseViewModel
@@ -48,6 +49,10 @@ class LoginViewModel extends BaseViewModel
 
   @override
   login() async {
+    inputState.add(
+      LoadingState(stateRendererType: StateRendererType.popupLoadingState),
+    );
+
     Logger logger = Logger();
     final response = await _loginUseCase.execute(
       LoginUseCaseInput(
@@ -57,13 +62,19 @@ class LoginViewModel extends BaseViewModel
     );
 
     response.fold(
-      (failure) => {
+      (failure) {
         // left > failure
-        logger.e('${failure.code}: ${failure.message}')
+        inputState.add(
+          ErrorState(StateRendererType.popupErrorState, failure.message),
+        );
+        logger.e('${failure.code}: ${failure.message}');
       },
-      (data) => {
+      (data) {
         // right > success (data)
-        logger.i(data)
+        logger.i(data.customer?.name);
+        inputState.add(ContentState());
+
+        // navigate to main screen after the login
       },
     );
   }
