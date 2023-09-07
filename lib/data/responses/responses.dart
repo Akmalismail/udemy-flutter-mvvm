@@ -69,3 +69,19 @@ class AuthenticationResponse extends BaseResponse {
   @override
   Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
 }
+
+@JsonSerializable()
+class ResetPasswordResponse extends BaseResponse {
+  @JsonKey(name: "support")
+  String? support;
+
+  ResetPasswordResponse(status, message, this.support) : super(status, message);
+
+  // from json
+  factory ResetPasswordResponse.fromJson(Map<String, dynamic> json) {
+    return _$ResetPasswordResponseFromJson(json);
+  }
+  // to json
+  @override
+  Map<String, dynamic> toJson() => _$ResetPasswordResponseToJson(this);
+}

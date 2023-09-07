@@ -16,4 +16,9 @@ abstract class AppServiceClient {
     @Field("imei") String imei,
     @Field("deviceType") String deviceType,
   );
+
+  @POST("/customers/reset-password")
+  Future<ResetPasswordResponse> resetPassword(
+    @Field("email") String email,
+  );
 }

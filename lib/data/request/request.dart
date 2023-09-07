@@ -11,3 +11,11 @@ class LoginRequest {
     this.deviceType,
   );
 }
+
+class ResetPasswordRequest {
+  String email;
+
+  ResetPasswordRequest(
+    this.email,
+  );
+}

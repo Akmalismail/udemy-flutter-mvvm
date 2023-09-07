@@ -18,7 +18,7 @@ class LoginViewModel extends BaseViewModel
   final StreamController isUserLoggedInSuccessfullyStreamController =
       StreamController<bool>();
 
-  var loginCredentials = const LoginCredentials(
+  var loginFields = const LoginFields(
     username: "",
     password: "",
   );
@@ -58,8 +58,8 @@ class LoginViewModel extends BaseViewModel
     Logger logger = Logger();
     final response = await _loginUseCase.execute(
       LoginUseCaseInput(
-        loginCredentials.username,
-        loginCredentials.password,
+        loginFields.username,
+        loginFields.password,
       ),
     );
 
@@ -85,14 +85,14 @@ class LoginViewModel extends BaseViewModel
   @override
   setPassword(String password) {
     inputPassword.add(password);
-    loginCredentials = loginCredentials.copyWith(password: password);
+    loginFields = loginFields.copyWith(password: password);
     _validate();
   }
 
   @override
   setUsername(String username) {
     inputUsername.add(username);
-    loginCredentials = loginCredentials.copyWith(username: username);
+    loginFields = loginFields.copyWith(username: username);
     _validate();
   }
 
@@ -127,8 +127,8 @@ class LoginViewModel extends BaseViewModel
   }
 
   bool _isAllInputsValid() {
-    return _isUsenameValid(loginCredentials.username) &&
-        _isPasswordValid(loginCredentials.password);
+    return _isUsenameValid(loginFields.username) &&
+        _isPasswordValid(loginFields.password);
   }
 }
 

@@ -8,7 +8,9 @@ import 'package:udemy_flutter_mvvm/data/network/dio_factory.dart';
 import 'package:udemy_flutter_mvvm/data/network/network_info.dart';
 import 'package:udemy_flutter_mvvm/data/repository/repository_impl.dart';
 import 'package:udemy_flutter_mvvm/domain/respository/repository.dart';
+import 'package:udemy_flutter_mvvm/domain/use_case/forgot_password_use_case.dart';
 import 'package:udemy_flutter_mvvm/domain/use_case/login_use_case.dart';
+import 'package:udemy_flutter_mvvm/presentation/forgot_password/forgot_password_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/login/login_view_model.dart';
 
 final instance = GetIt.instance;
@@ -63,5 +65,18 @@ initLoginModule() async {
   );
   instance.registerFactory<LoginViewModel>(
     () => LoginViewModel(instance()),
+  );
+}
+
+initForgotPasswordModule() async {
+  if (instance.isRegistered<ForgotPasswordUseCase>()) {
+    return;
+  }
+
+  instance.registerFactory<ForgotPasswordUseCase>(
+    () => ForgotPasswordUseCase(instance()),
+  );
+  instance.registerFactory<ForgotPasswordViewModel>(
+    () => ForgotPasswordViewModel(instance()),
   );
 }

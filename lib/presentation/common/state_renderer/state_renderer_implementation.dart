@@ -58,7 +58,7 @@ class EmptyState extends FlowState {
   EmptyState(this.message);
 
   @override
-  String getMessage() => empty;
+  String getMessage() => message;
 
   @override
   StateRendererType getStateRendererType() =>
@@ -130,7 +130,7 @@ extension FlowStateExtension on FlowState {
 
   void showPopup(BuildContext context, StateRendererType stateRendererType,
       String message) {
-    WidgetsBinding.instance.addPersistentFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog(
         context: context,
         builder: (context) => StateRenderer(

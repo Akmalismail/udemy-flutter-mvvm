@@ -4,6 +4,8 @@ import 'package:udemy_flutter_mvvm/data/responses/responses.dart';
 
 abstract class RemoteDataSource {
   Future<AuthenticationResponse> login(LoginRequest loginRequest);
+  Future<ResetPasswordResponse> resetPassword(
+      ResetPasswordRequest resetPasswordRequest);
 }
 
 class RemoteDataSourceImplementer implements RemoteDataSource {
@@ -18,6 +20,14 @@ class RemoteDataSourceImplementer implements RemoteDataSource {
       loginRequest.password,
       loginRequest.imei,
       loginRequest.deviceType,
+    );
+  }
+
+  @override
+  Future<ResetPasswordResponse> resetPassword(
+      ResetPasswordRequest resetPasswordRequest) async {
+    return await _appServiceClient.resetPassword(
+      resetPasswordRequest.email,
     );
   }
 }

@@ -19,6 +19,8 @@ class AppStrings {
   static const String usernameError = 'Username is empty';
   static const String password = 'Password';
   static const String passwordError = 'Password is empty';
+  static const String email = 'Email';
+  static const String emailError = 'Email is empty';
 
   // loads
   static const String loading = 'Loading...';
@@ -30,4 +32,6 @@ class AppStrings {
   static const String registerText = 'Not a member? Sign up!';
   static const String retryAgain = 'Retry';
   static const String ok = 'Ok';
+  static const String resetPassword = 'Reset Password';
+  static const String didntReceiveEmail = 'Didn\'t receive email? Resend';
 }
