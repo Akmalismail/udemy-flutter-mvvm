@@ -67,6 +67,9 @@ class RegisterViewModel extends BaseViewModel
   Sink get inputUserName => _userNameStreamController.sink;
 
   @override
+  Sink get inputAllInputsValid => _isAllInputsValidStreamController.sink;
+
+  @override
   setUserName(String userName) {
     if (_isUserNameValid(userName)) {
       // update register view object with username value
@@ -75,6 +78,7 @@ class RegisterViewModel extends BaseViewModel
       // reset username value in register view object
       registerFields = registerFields.copyWith(userName: "");
     }
+    _validate();
   }
 
   @override
@@ -84,6 +88,7 @@ class RegisterViewModel extends BaseViewModel
     } else {
       registerFields = registerFields.copyWith(password: "");
     }
+    _validate();
   }
 
   @override
@@ -93,6 +98,7 @@ class RegisterViewModel extends BaseViewModel
     } else {
       registerFields = registerFields.copyWith(mobileNumber: "");
     }
+    _validate();
   }
 
   @override
@@ -102,6 +108,7 @@ class RegisterViewModel extends BaseViewModel
     } else {
       registerFields = registerFields.copyWith(email: "");
     }
+    _validate();
   }
 
   @override
@@ -111,6 +118,7 @@ class RegisterViewModel extends BaseViewModel
     } else {
       registerFields = registerFields.copyWith(countryMobileCode: "");
     }
+    _validate();
   }
 
   @override
@@ -120,6 +128,7 @@ class RegisterViewModel extends BaseViewModel
     } else {
       registerFields = registerFields.copyWith(profilePicture: "");
     }
+    _validate();
   }
 
   // --- outputs ---
@@ -162,6 +171,10 @@ class RegisterViewModel extends BaseViewModel
           .map((profilePicture) => profilePicture);
 
   @override
+  Stream<bool> get outputIsAllInputsValid =>
+      _isAllInputsValidStreamController.stream.map((_) => _validateAllInputs());
+
+  @override
   register() {
     // TODO: implement register
     throw UnimplementedError();
@@ -179,6 +192,19 @@ class RegisterViewModel extends BaseViewModel
   bool _isPasswordValid(String password) {
     return password.length >= 8;
   }
+
+  bool _validateAllInputs() {
+    return registerFields.countryMobileCode.isNotEmpty &&
+        registerFields.userName.isNotEmpty &&
+        registerFields.password.isNotEmpty &&
+        registerFields.mobileNumber.isNotEmpty &&
+        registerFields.email.isNotEmpty &&
+        registerFields.profilePicture.isNotEmpty;
+  }
+
+  void _validate() {
+    inputAllInputsValid.add(null);
+  }
 }
 
 abstract class RegisterViewModelInput {
@@ -195,6 +221,7 @@ abstract class RegisterViewModelInput {
   Sink get inputEmail;
   Sink get inputPassword;
   Sink get inputProfilePicture;
+  Sink get inputAllInputsValid;
 }
 
 abstract class RegisterViewModelOutput {
@@ -211,4 +238,6 @@ abstract class RegisterViewModelOutput {
   Stream<String?> get outputErrorPassword;
 
   Stream<File> get outputIsProfilePictureValid;
+
+  Stream<bool> get outputIsAllInputsValid;
 }
