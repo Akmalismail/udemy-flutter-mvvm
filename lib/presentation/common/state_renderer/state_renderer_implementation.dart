@@ -85,6 +85,8 @@ extension FlowStateExtension on FlowState {
     switch (runtimeType) {
       case LoadingState:
         if (getStateRendererType() == StateRendererType.popupLoadingState) {
+          dismissDialog(context);
+
           // show popup dialog
           showPopup(
             context,
@@ -103,6 +105,8 @@ extension FlowStateExtension on FlowState {
         }
       case ErrorState:
         if (getStateRendererType() == StateRendererType.popupErrorState) {
+          dismissDialog(context);
+
           // show popup dialog
           showPopup(
             context,
@@ -129,6 +133,8 @@ extension FlowStateExtension on FlowState {
           retryActionFunction: retryActionFunction,
         );
       case SuccessState:
+        dismissDialog(context);
+
         // show popup dialog
         showPopup(
           context,
