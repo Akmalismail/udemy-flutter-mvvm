@@ -24,7 +24,7 @@ class RegisterViewModel extends BaseViewModel
   final StreamController<void> _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
 
-  RegisterUseCase _registerUseCase;
+  final RegisterUseCase _registerUseCase;
 
   var registerFields = const RegisterFields(
     countryMobileCode: "",
@@ -37,6 +37,7 @@ class RegisterViewModel extends BaseViewModel
 
   RegisterViewModel(this._registerUseCase);
 
+  @override
   void start() {
     // view tells state renderer, please show the content of the screen.
     inputState.add(ContentState());

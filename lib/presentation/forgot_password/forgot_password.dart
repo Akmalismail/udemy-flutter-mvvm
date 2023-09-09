@@ -121,7 +121,6 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                     stream: _viewModel
                         .isPasswordResetSucessfullyStreamController.stream,
                     builder: (context, snapshot) {
-                      print('snapshot ${snapshot.data}');
                       if (snapshot.data == true) {
                         return TextButton(
                           onPressed: () {
