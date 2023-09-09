@@ -88,18 +88,16 @@ class _RegisterViewState extends State<RegisterView> {
                   left: AppPadding.p28,
                   right: AppPadding.p28,
                 ),
-                child: StreamBuilder<bool>(
-                  stream: _viewModel.outputIsEmailValid,
+                child: StreamBuilder<String?>(
+                  stream: _viewModel.outputErrorUserName,
                   builder: (context, snapshot) {
                     return TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      controller: _emailController,
+                      keyboardType: TextInputType.text,
+                      controller: _userNameController,
                       decoration: InputDecoration(
-                        hintText: AppStrings.email,
-                        labelText: AppStrings.email,
-                        errorText: (snapshot.data ?? true)
-                            ? null
-                            : AppStrings.usernameError,
+                        hintText: AppStrings.username,
+                        labelText: AppStrings.username,
+                        errorText: snapshot.data,
                       ),
                     );
                   },
@@ -111,8 +109,8 @@ class _RegisterViewState extends State<RegisterView> {
                   left: AppPadding.p28,
                   right: AppPadding.p28,
                 ),
-                child: StreamBuilder<bool>(
-                  stream: _viewModel.outputIsPasswordValid,
+                child: StreamBuilder<String?>(
+                  stream: _viewModel.outputErrorPassword,
                   builder: (context, snapshot) {
                     return TextFormField(
                       keyboardType: TextInputType.visiblePassword,
@@ -120,9 +118,7 @@ class _RegisterViewState extends State<RegisterView> {
                       decoration: InputDecoration(
                         hintText: AppStrings.password,
                         labelText: AppStrings.password,
-                        errorText: (snapshot.data ?? true)
-                            ? null
-                            : AppStrings.passwordError,
+                        errorText: snapshot.data,
                       ),
                     );
                   },
@@ -144,7 +140,7 @@ class _RegisterViewState extends State<RegisterView> {
                           onPressed: (snapshot.data ?? false)
                               ? () {
                                   FocusManager.instance.primaryFocus?.unfocus();
-                                  _viewModel.login();
+                                  _viewModel.register();
                                 }
                               : null,
                           child: const Text(AppStrings.login),
@@ -158,41 +154,12 @@ class _RegisterViewState extends State<RegisterView> {
                   left: AppPadding.p28,
                   right: AppPadding.p28,
                 ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Flexible(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacementNamed(
-                            context,
-                            Routes.forgotPasswordRoute,
-                          );
-                        },
-                        child: Text(
-                          AppStrings.forgetPassword,
-                          style: Theme.of(context).textTheme.titleSmall,
-                        ),
-                      ),
-                    ),
-                    Flexible(
-                      child: Align(
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              Routes.registerRoute,
-                            );
-                          },
-                          child: Text(
-                            AppStrings.registerText,
-                            style: Theme.of(context).textTheme.titleSmall,
-                            textAlign: TextAlign.right,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
+                child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    AppStrings.didntReceiveEmail,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
                 ),
               )
             ],
