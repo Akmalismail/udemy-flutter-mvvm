@@ -20,4 +20,5 @@ class JsonAssets {
   static const String error = '$jsonPath/90569-error.json';
   static const String loading = '$jsonPath/97952-loading-animation-blue.json';
   static const String empty = '$jsonPath/123936-empty-ghost.json';
+  static const String success = '$jsonPath/animation_lmbl7nq6.json';
 }

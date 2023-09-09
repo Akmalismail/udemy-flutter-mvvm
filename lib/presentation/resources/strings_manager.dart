@@ -22,6 +22,8 @@ class AppStrings {
   static const String email = 'Email';
   static const String emailError = 'Email is empty';
 
+  static const String success = 'Success';
+
   // loads
   static const String loading = 'Loading...';
 
