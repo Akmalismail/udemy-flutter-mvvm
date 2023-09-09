@@ -10,7 +10,7 @@ abstract class Repository {
   Future<Either<Failure, String>> resetPassword(
     ResetPasswordRequest resetPasswordRequest,
   );
-  Future<Either<Failure, String>> register(
+  Future<Either<Failure, Authentication>> register(
     RegisterRequest registerRequest,
   );
 }

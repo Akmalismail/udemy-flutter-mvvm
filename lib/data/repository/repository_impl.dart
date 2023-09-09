@@ -74,4 +74,34 @@ class RepositoryImplementer extends Repository {
       return Left(ErrorHandler.handle(error).failure);
     }
   }
+
+  @override
+  Future<Either<Failure, Authentication>> register(
+    RegisterRequest registerRequest,
+  ) async {
+    // no network
+    if (!await _networkInfo.isConnected) {
+      return Left(HttpStatus.noInternetConnection.failure);
+    }
+
+    try {
+      // request
+      final response = await _remoteDataSource.register(registerRequest);
+
+      // http error
+      if (response.status != ApiInternalStatus.success) {
+        return Left(
+          Failure(
+            response.status ?? ApiInternalStatus.failure,
+            response.message ?? HttpStatus.unknown.message,
+          ),
+        );
+      }
+
+      // success
+      return Right(response.toDomain());
+    } catch (error) {
+      return Left(ErrorHandler.handle(error).failure);
+    }
+  }
 }
