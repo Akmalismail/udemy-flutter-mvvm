@@ -1,5 +1,7 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_mvvm/app/di.dart';
+import 'package:udemy_flutter_mvvm/data/mapper/mapper.dart';
 import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer_implementation.dart';
 import 'package:udemy_flutter_mvvm/presentation/register/register_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/assets_manager.dart';
@@ -83,6 +85,8 @@ class _RegisterViewState extends State<RegisterView> {
             children: [
               Image.asset(ImageAssets.splashLogo),
               const SizedBox(height: AppSize.s28),
+
+              // fields
               Padding(
                 padding: const EdgeInsets.only(
                   left: AppPadding.p28,
@@ -104,6 +108,80 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
               ),
               const SizedBox(height: AppSize.s28),
+
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: AppPadding.p28,
+                    right: AppPadding.p28,
+                    bottom: AppPadding.p28,
+                  ),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: CountryCodePicker(
+                          onChanged: (country) {
+                            // update view model with the selected code.
+                            _viewModel
+                                .setCountryCode(country.dialCode ?? empty);
+                          },
+                          initialSelection: "+33",
+                          showCountryOnly: true,
+                          showOnlyCountryWhenClosed: true,
+                          favorite: const [
+                            "+60",
+                            "+966",
+                            "+02",
+                            "+39",
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 3,
+                        child: StreamBuilder<String?>(
+                          stream: _viewModel.outputErrorMobileNumber,
+                          builder: (context, snapshot) {
+                            return TextFormField(
+                              keyboardType: TextInputType.phone,
+                              controller: _mobileNumberController,
+                              decoration: InputDecoration(
+                                hintText: AppStrings.mobileNumber,
+                                labelText: AppStrings.mobileNumber,
+                                errorText: snapshot.data,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSize.s28),
+
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: AppPadding.p28,
+                  right: AppPadding.p28,
+                ),
+                child: StreamBuilder<String?>(
+                  stream: _viewModel.outputErrorEmail,
+                  builder: (context, snapshot) {
+                    return TextFormField(
+                      keyboardType: TextInputType.emailAddress,
+                      controller: _emailController,
+                      decoration: InputDecoration(
+                        hintText: AppStrings.email,
+                        labelText: AppStrings.email,
+                        errorText: snapshot.data,
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: AppSize.s28),
+
               Padding(
                 padding: const EdgeInsets.only(
                   left: AppPadding.p28,
@@ -125,6 +203,8 @@ class _RegisterViewState extends State<RegisterView> {
                 ),
               ),
               const SizedBox(height: AppSize.s28),
+
+              // button
               Padding(
                 padding: const EdgeInsets.only(
                   left: AppPadding.p28,
