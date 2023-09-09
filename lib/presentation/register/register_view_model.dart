@@ -25,9 +25,10 @@ class RegisterViewModel extends BaseViewModel
 
   var registerFields = const RegisterFields(
     countryMobileCode: "",
-    name: "",
-    email: "",
+    userName: "",
     password: "",
+    mobileNumber: "",
+    email: "",
     profilePicture: "",
   );
 
@@ -64,6 +65,62 @@ class RegisterViewModel extends BaseViewModel
 
   @override
   Sink get inputUserName => _userNameStreamController.sink;
+
+  @override
+  setUserName(String userName) {
+    if (_isUserNameValid(userName)) {
+      // update register view object with username value
+      registerFields = registerFields.copyWith(userName: userName);
+    } else {
+      // reset username value in register view object
+      registerFields = registerFields.copyWith(userName: "");
+    }
+  }
+
+  @override
+  setPassword(String password) {
+    if (_isPasswordValid(password)) {
+      registerFields = registerFields.copyWith(password: password);
+    } else {
+      registerFields = registerFields.copyWith(password: "");
+    }
+  }
+
+  @override
+  setMobileNumber(String mobileNumber) {
+    if (_isMobileNumberValid(mobileNumber)) {
+      registerFields = registerFields.copyWith(mobileNumber: mobileNumber);
+    } else {
+      registerFields = registerFields.copyWith(mobileNumber: "");
+    }
+  }
+
+  @override
+  setEmail(String email) {
+    if (isEmailValid(email)) {
+      registerFields = registerFields.copyWith(email: email);
+    } else {
+      registerFields = registerFields.copyWith(email: "");
+    }
+  }
+
+  @override
+  setCountryCode(String countryCode) {
+    if (countryCode.isNotEmpty) {
+      registerFields = registerFields.copyWith(countryMobileCode: countryCode);
+    } else {
+      registerFields = registerFields.copyWith(countryMobileCode: "");
+    }
+  }
+
+  @override
+  setProfilePicutre(File file) {
+    if (file.path.isNotEmpty) {
+      registerFields = registerFields.copyWith(profilePicture: file.path);
+    } else {
+      registerFields = registerFields.copyWith(profilePicture: "");
+    }
+  }
 
   // --- outputs ---
   @override
@@ -126,6 +183,12 @@ class RegisterViewModel extends BaseViewModel
 
 abstract class RegisterViewModelInput {
   register();
+  setUserName(String userName);
+  setMobileNumber(String mobileNumber);
+  setCountryCode(String countryCode);
+  setEmail(String email);
+  setPassword(String password);
+  setProfilePicutre(File file);
 
   Sink get inputUserName;
   Sink get inputMobileNumber;

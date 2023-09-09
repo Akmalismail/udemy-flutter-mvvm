@@ -273,9 +273,10 @@ abstract class _ResetPasswordFields implements ResetPasswordFields {
 /// @nodoc
 mixin _$RegisterFields {
   String get countryMobileCode => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
+  String get mobileNumber => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
   String get profilePicture => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -291,9 +292,10 @@ abstract class $RegisterFieldsCopyWith<$Res> {
   @useResult
   $Res call(
       {String countryMobileCode,
-      String name,
-      String email,
+      String userName,
       String password,
+      String mobileNumber,
+      String email,
       String profilePicture});
 }
 
@@ -311,9 +313,10 @@ class _$RegisterFieldsCopyWithImpl<$Res, $Val extends RegisterFields>
   @override
   $Res call({
     Object? countryMobileCode = null,
-    Object? name = null,
-    Object? email = null,
+    Object? userName = null,
     Object? password = null,
+    Object? mobileNumber = null,
+    Object? email = null,
     Object? profilePicture = null,
   }) {
     return _then(_value.copyWith(
@@ -321,17 +324,21 @@ class _$RegisterFieldsCopyWithImpl<$Res, $Val extends RegisterFields>
           ? _value.countryMobileCode
           : countryMobileCode // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      mobileNumber: null == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       profilePicture: null == profilePicture
           ? _value.profilePicture
@@ -351,9 +358,10 @@ abstract class _$$_RegisterFieldsCopyWith<$Res>
   @useResult
   $Res call(
       {String countryMobileCode,
-      String name,
-      String email,
+      String userName,
       String password,
+      String mobileNumber,
+      String email,
       String profilePicture});
 }
 
@@ -369,9 +377,10 @@ class __$$_RegisterFieldsCopyWithImpl<$Res>
   @override
   $Res call({
     Object? countryMobileCode = null,
-    Object? name = null,
-    Object? email = null,
+    Object? userName = null,
     Object? password = null,
+    Object? mobileNumber = null,
+    Object? email = null,
     Object? profilePicture = null,
   }) {
     return _then(_$_RegisterFields(
@@ -379,17 +388,21 @@ class __$$_RegisterFieldsCopyWithImpl<$Res>
           ? _value.countryMobileCode
           : countryMobileCode // ignore: cast_nullable_to_non_nullable
               as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      userName: null == userName
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String,
       password: null == password
           ? _value.password
           : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      mobileNumber: null == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
               as String,
       profilePicture: null == profilePicture
           ? _value.profilePicture
@@ -404,25 +417,28 @@ class __$$_RegisterFieldsCopyWithImpl<$Res>
 class _$_RegisterFields implements _RegisterFields {
   const _$_RegisterFields(
       {required this.countryMobileCode,
-      required this.name,
-      required this.email,
+      required this.userName,
       required this.password,
+      required this.mobileNumber,
+      required this.email,
       required this.profilePicture});
 
   @override
   final String countryMobileCode;
   @override
-  final String name;
-  @override
-  final String email;
+  final String userName;
   @override
   final String password;
+  @override
+  final String mobileNumber;
+  @override
+  final String email;
   @override
   final String profilePicture;
 
   @override
   String toString() {
-    return 'RegisterFields(countryMobileCode: $countryMobileCode, name: $name, email: $email, password: $password, profilePicture: $profilePicture)';
+    return 'RegisterFields(countryMobileCode: $countryMobileCode, userName: $userName, password: $password, mobileNumber: $mobileNumber, email: $email, profilePicture: $profilePicture)';
   }
 
   @override
@@ -432,17 +448,20 @@ class _$_RegisterFields implements _RegisterFields {
             other is _$_RegisterFields &&
             (identical(other.countryMobileCode, countryMobileCode) ||
                 other.countryMobileCode == countryMobileCode) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email) &&
+            (identical(other.userName, userName) ||
+                other.userName == userName) &&
             (identical(other.password, password) ||
                 other.password == password) &&
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber) &&
+            (identical(other.email, email) || other.email == email) &&
             (identical(other.profilePicture, profilePicture) ||
                 other.profilePicture == profilePicture));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, countryMobileCode, name, email, password, profilePicture);
+  int get hashCode => Object.hash(runtimeType, countryMobileCode, userName,
+      password, mobileNumber, email, profilePicture);
 
   @JsonKey(ignore: true)
   @override
@@ -454,19 +473,22 @@ class _$_RegisterFields implements _RegisterFields {
 abstract class _RegisterFields implements RegisterFields {
   const factory _RegisterFields(
       {required final String countryMobileCode,
-      required final String name,
-      required final String email,
+      required final String userName,
       required final String password,
+      required final String mobileNumber,
+      required final String email,
       required final String profilePicture}) = _$_RegisterFields;
 
   @override
   String get countryMobileCode;
   @override
-  String get name;
-  @override
-  String get email;
+  String get userName;
   @override
   String get password;
+  @override
+  String get mobileNumber;
+  @override
+  String get email;
   @override
   String get profilePicture;
   @override

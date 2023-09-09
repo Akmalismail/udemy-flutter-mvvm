@@ -21,9 +21,10 @@ class ResetPasswordFields with _$ResetPasswordFields {
 class RegisterFields with _$RegisterFields {
   const factory RegisterFields({
     required String countryMobileCode,
-    required String name,
-    required String email,
+    required String userName,
     required String password,
+    required String mobileNumber,
+    required String email,
     required String profilePicture,
   }) = _RegisterFields;
 }
