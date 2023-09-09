@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:udemy_flutter_mvvm/app/functions.dart';
 import 'package:udemy_flutter_mvvm/domain/use_case/register_use_case.dart';
 import 'package:udemy_flutter_mvvm/presentation/base/base_view_model.dart';
+import 'package:udemy_flutter_mvvm/presentation/common/freezed_data_classes.dart';
 
 class RegisterViewModel extends BaseViewModel
     with RegisterViewModelInput, RegisterViewModelOutput {
@@ -21,6 +22,14 @@ class RegisterViewModel extends BaseViewModel
       StreamController<void>.broadcast();
 
   RegisterUseCase _registerUseCase;
+
+  var registerFields = const RegisterFields(
+    countryMobileCode: "",
+    name: "",
+    email: "",
+    password: "",
+    profilePicture: "",
+  );
 
   RegisterViewModel(this._registerUseCase);
 

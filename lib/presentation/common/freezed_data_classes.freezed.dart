@@ -269,3 +269,208 @@ abstract class _ResetPasswordFields implements ResetPasswordFields {
   _$$_ResetPasswordFieldsCopyWith<_$_ResetPasswordFields> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$RegisterFields {
+  String get countryMobileCode => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  String get profilePicture => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $RegisterFieldsCopyWith<RegisterFields> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $RegisterFieldsCopyWith<$Res> {
+  factory $RegisterFieldsCopyWith(
+          RegisterFields value, $Res Function(RegisterFields) then) =
+      _$RegisterFieldsCopyWithImpl<$Res, RegisterFields>;
+  @useResult
+  $Res call(
+      {String countryMobileCode,
+      String name,
+      String email,
+      String password,
+      String profilePicture});
+}
+
+/// @nodoc
+class _$RegisterFieldsCopyWithImpl<$Res, $Val extends RegisterFields>
+    implements $RegisterFieldsCopyWith<$Res> {
+  _$RegisterFieldsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? countryMobileCode = null,
+    Object? name = null,
+    Object? email = null,
+    Object? password = null,
+    Object? profilePicture = null,
+  }) {
+    return _then(_value.copyWith(
+      countryMobileCode: null == countryMobileCode
+          ? _value.countryMobileCode
+          : countryMobileCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      profilePicture: null == profilePicture
+          ? _value.profilePicture
+          : profilePicture // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_RegisterFieldsCopyWith<$Res>
+    implements $RegisterFieldsCopyWith<$Res> {
+  factory _$$_RegisterFieldsCopyWith(
+          _$_RegisterFields value, $Res Function(_$_RegisterFields) then) =
+      __$$_RegisterFieldsCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String countryMobileCode,
+      String name,
+      String email,
+      String password,
+      String profilePicture});
+}
+
+/// @nodoc
+class __$$_RegisterFieldsCopyWithImpl<$Res>
+    extends _$RegisterFieldsCopyWithImpl<$Res, _$_RegisterFields>
+    implements _$$_RegisterFieldsCopyWith<$Res> {
+  __$$_RegisterFieldsCopyWithImpl(
+      _$_RegisterFields _value, $Res Function(_$_RegisterFields) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? countryMobileCode = null,
+    Object? name = null,
+    Object? email = null,
+    Object? password = null,
+    Object? profilePicture = null,
+  }) {
+    return _then(_$_RegisterFields(
+      countryMobileCode: null == countryMobileCode
+          ? _value.countryMobileCode
+          : countryMobileCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      profilePicture: null == profilePicture
+          ? _value.profilePicture
+          : profilePicture // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_RegisterFields implements _RegisterFields {
+  const _$_RegisterFields(
+      {required this.countryMobileCode,
+      required this.name,
+      required this.email,
+      required this.password,
+      required this.profilePicture});
+
+  @override
+  final String countryMobileCode;
+  @override
+  final String name;
+  @override
+  final String email;
+  @override
+  final String password;
+  @override
+  final String profilePicture;
+
+  @override
+  String toString() {
+    return 'RegisterFields(countryMobileCode: $countryMobileCode, name: $name, email: $email, password: $password, profilePicture: $profilePicture)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_RegisterFields &&
+            (identical(other.countryMobileCode, countryMobileCode) ||
+                other.countryMobileCode == countryMobileCode) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.profilePicture, profilePicture) ||
+                other.profilePicture == profilePicture));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, countryMobileCode, name, email, password, profilePicture);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_RegisterFieldsCopyWith<_$_RegisterFields> get copyWith =>
+      __$$_RegisterFieldsCopyWithImpl<_$_RegisterFields>(this, _$identity);
+}
+
+abstract class _RegisterFields implements RegisterFields {
+  const factory _RegisterFields(
+      {required final String countryMobileCode,
+      required final String name,
+      required final String email,
+      required final String password,
+      required final String profilePicture}) = _$_RegisterFields;
+
+  @override
+  String get countryMobileCode;
+  @override
+  String get name;
+  @override
+  String get email;
+  @override
+  String get password;
+  @override
+  String get profilePicture;
+  @override
+  @JsonKey(ignore: true)
+  _$$_RegisterFieldsCopyWith<_$_RegisterFields> get copyWith =>
+      throw _privateConstructorUsedError;
+}

@@ -16,3 +16,14 @@ class ResetPasswordFields with _$ResetPasswordFields {
     required String email,
   }) = _ResetPasswordFields;
 }
+
+@freezed
+class RegisterFields with _$RegisterFields {
+  const factory RegisterFields({
+    required String countryMobileCode,
+    required String name,
+    required String email,
+    required String password,
+    required String profilePicture,
+  }) = _RegisterFields;
+}
