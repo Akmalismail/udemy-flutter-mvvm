@@ -19,3 +19,19 @@ class ResetPasswordRequest {
     this.email,
   );
 }
+
+class RegisterRequest {
+  String countryMobileCode;
+  String name;
+  String email;
+  String password;
+  String profilePicture;
+
+  RegisterRequest(
+    this.countryMobileCode,
+    this.name,
+    this.email,
+    this.password,
+    this.profilePicture,
+  );
+}
