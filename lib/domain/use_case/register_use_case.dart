@@ -25,6 +25,7 @@ class RegisterUseCase
 }
 
 class RegisterUseCaseInput {
+  final String mobileNumber;
   final String countryMobileCode;
   final String name;
   final String email;
@@ -32,6 +33,7 @@ class RegisterUseCaseInput {
   final String profilePicture;
 
   const RegisterUseCaseInput(
+    this.mobileNumber,
     this.countryMobileCode,
     this.name,
     this.email,

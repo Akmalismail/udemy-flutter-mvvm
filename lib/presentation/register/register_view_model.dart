@@ -1,10 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:logger/logger.dart';
 import 'package:udemy_flutter_mvvm/app/functions.dart';
 import 'package:udemy_flutter_mvvm/domain/use_case/register_use_case.dart';
 import 'package:udemy_flutter_mvvm/presentation/base/base_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/common/freezed_data_classes.dart';
+import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer.dart';
+import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer_implementation.dart';
 
 class RegisterViewModel extends BaseViewModel
     with RegisterViewModelInput, RegisterViewModelOutput {
@@ -34,9 +37,9 @@ class RegisterViewModel extends BaseViewModel
 
   RegisterViewModel(this._registerUseCase);
 
-  @override
   void start() {
-    // TODO: implement start
+    // view tells state renderer, please show the content of the screen.
+    inputState.add(ContentState());
   }
 
   @override
@@ -175,9 +178,37 @@ class RegisterViewModel extends BaseViewModel
       _isAllInputsValidStreamController.stream.map((_) => _validateAllInputs());
 
   @override
-  register() {
-    // TODO: implement register
-    throw UnimplementedError();
+  register() async {
+    inputState.add(
+      LoadingState(stateRendererType: StateRendererType.popupLoadingState),
+    );
+
+    Logger logger = Logger();
+    final response = await _registerUseCase.execute(
+      RegisterUseCaseInput(
+        registerFields.mobileNumber,
+        registerFields.countryMobileCode,
+        registerFields.userName,
+        registerFields.email,
+        registerFields.password,
+        registerFields.profilePicture,
+      ),
+    );
+
+    response.fold(
+      (failure) {
+        // left > failure
+        inputState.add(
+          ErrorState(StateRendererType.popupErrorState, failure.message),
+        );
+        logger.e('${failure.code}: ${failure.message}');
+      },
+      (data) {
+        // right > success (data)
+        logger.i(data.customer?.name);
+        inputState.add(ContentState());
+      },
+    );
   }
 
   // --- private methods
