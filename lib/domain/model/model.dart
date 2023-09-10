@@ -40,3 +40,61 @@ class DeviceInfo {
     this.version,
   );
 }
+
+class Service {
+  final String id;
+  final String title;
+  final String image;
+
+  const Service(
+    this.id,
+    this.title,
+    this.image,
+  );
+}
+
+class Store {
+  final String id;
+  final String title;
+  final String image;
+
+  const Store(
+    this.id,
+    this.title,
+    this.image,
+  );
+}
+
+class Banner {
+  final String id;
+  final String title;
+  final String image;
+  final String link;
+
+  const Banner(
+    this.id,
+    this.title,
+    this.image,
+    this.link,
+  );
+}
+
+class HomeData {
+  final List<Service> services;
+  final List<Store> stores;
+  final List<Banner> banners;
+
+  const HomeData(
+    this.services,
+    this.stores,
+    this.banners,
+  );
+}
+
+class Home {
+  final HomeData data;
+
+  const Home(
+    this.data,
+  );
+}
