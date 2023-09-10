@@ -161,7 +161,7 @@ class _LoginViewState extends State<LoginView> {
                     Flexible(
                       child: TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
+                          Navigator.pushNamed(
                             context,
                             Routes.forgotPasswordRoute,
                           );
@@ -176,7 +176,7 @@ class _LoginViewState extends State<LoginView> {
                       child: Align(
                         child: TextButton(
                           onPressed: () {
-                            Navigator.pushReplacementNamed(
+                            Navigator.pushNamed(
                               context,
                               Routes.registerRoute,
                             );

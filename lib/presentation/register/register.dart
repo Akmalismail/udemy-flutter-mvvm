@@ -55,11 +55,12 @@ class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       backgroundColor: ColorManager.white,
       appBar: AppBar(
         elevation: AppSize.s0,
         iconTheme: IconThemeData(color: ColorManager.primary),
-        backgroundColor: ColorManager.white,
+        backgroundColor: Colors.transparent,
       ),
       body: StreamBuilder<FlowState>(
         stream: _viewModel.outputState,
@@ -89,7 +90,7 @@ class _RegisterViewState extends State<RegisterView> {
           child: Column(
             children: [
               Image.asset(ImageAssets.splashLogo),
-              const SizedBox(height: AppSize.s28),
+              const SizedBox(height: AppSize.s12),
 
               // fields
               Padding(
@@ -112,14 +113,13 @@ class _RegisterViewState extends State<RegisterView> {
                   },
                 ),
               ),
-              const SizedBox(height: AppSize.s28),
+              const SizedBox(height: AppSize.s12),
 
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(
                     left: AppPadding.p28,
                     right: AppPadding.p28,
-                    bottom: AppPadding.p28,
                   ),
                   child: Row(
                     children: [
@@ -133,6 +133,7 @@ class _RegisterViewState extends State<RegisterView> {
                           },
                           initialSelection: "+33",
                           showCountryOnly: true,
+                          hideMainText: true,
                           showOnlyCountryWhenClosed: true,
                           favorite: const [
                             "+60",
@@ -163,7 +164,7 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                 ),
               ),
-              const SizedBox(height: AppSize.s28),
+              const SizedBox(height: AppSize.s12),
 
               Padding(
                 padding: const EdgeInsets.only(
@@ -185,7 +186,7 @@ class _RegisterViewState extends State<RegisterView> {
                   },
                 ),
               ),
-              const SizedBox(height: AppSize.s28),
+              const SizedBox(height: AppSize.s12),
 
               Padding(
                 padding: const EdgeInsets.only(
@@ -207,7 +208,7 @@ class _RegisterViewState extends State<RegisterView> {
                   },
                 ),
               ),
-              const SizedBox(height: AppSize.s28),
+              const SizedBox(height: AppSize.s12),
 
               Padding(
                 padding: const EdgeInsets.only(
@@ -215,8 +216,10 @@ class _RegisterViewState extends State<RegisterView> {
                   right: AppPadding.p28,
                 ),
                 child: Container(
+                  height: 50,
                   decoration: BoxDecoration(
-                    border: Border.all(color: ColorManager.lightGrey),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: ColorManager.grey),
                   ),
                   child: GestureDetector(
                     child: _getMediaWidget(),
@@ -226,6 +229,8 @@ class _RegisterViewState extends State<RegisterView> {
                   ),
                 ),
               ),
+
+              const SizedBox(height: AppSize.s12),
 
               // button
               Padding(
