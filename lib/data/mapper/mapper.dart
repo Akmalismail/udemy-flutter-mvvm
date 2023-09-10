@@ -40,3 +40,34 @@ extension ResetPasswordResponseMapper on ResetPasswordResponse? {
     return this?.support ?? empty;
   }
 }
+
+extension ServiceResponseMapper on ServiceResponse? {
+  Service toDomain() {
+    return Service(
+      this?.id ?? zero,
+      this?.title ?? empty,
+      this?.image ?? empty,
+    );
+  }
+}
+
+extension StoreResponseMapper on StoreResponse? {
+  Store toDomain() {
+    return Store(
+      this?.id ?? zero,
+      this?.title ?? empty,
+      this?.image ?? empty,
+    );
+  }
+}
+
+extension BannerResponseMapper on BannerResponse? {
+  Banner toDomain() {
+    return Banner(
+      this?.id ?? zero,
+      this?.title ?? empty,
+      this?.image ?? empty,
+      this?.link ?? empty,
+    );
+  }
+}
