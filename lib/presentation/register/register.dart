@@ -246,7 +246,7 @@ class _RegisterViewState extends State<RegisterView> {
                                   _viewModel.register();
                                 }
                               : null,
-                          child: const Text(AppStrings.login),
+                          child: const Text(AppStrings.register),
                         ),
                       );
                     }),
@@ -258,9 +258,11 @@ class _RegisterViewState extends State<RegisterView> {
                   right: AppPadding.p28,
                 ),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                   child: Text(
-                    AppStrings.didntReceiveEmail,
+                    AppStrings.haveAccount,
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                 ),
