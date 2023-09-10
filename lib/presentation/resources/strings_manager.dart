@@ -29,4 +29,5 @@ class AppStrings {
   static const String success = 'Success';
   static const String username = 'Username';
   static const String usernameError = 'Username is empty';
+  static const String profilePicture = 'Profile picture';
 }
