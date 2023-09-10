@@ -6,7 +6,7 @@ import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/splash/splash.dart';
 import 'package:udemy_flutter_mvvm/presentation/register/register.dart';
 import 'package:udemy_flutter_mvvm/presentation/forgot_password/forgot_password.dart';
-import 'package:udemy_flutter_mvvm/presentation/main/main.dart';
+import 'package:udemy_flutter_mvvm/presentation/main/main_view.dart';
 import 'package:udemy_flutter_mvvm/presentation/store_details/store_details.dart';
 
 class Routes {
