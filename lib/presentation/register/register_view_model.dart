@@ -24,6 +24,9 @@ class RegisterViewModel extends BaseViewModel
   final StreamController<void> _isAllInputsValidStreamController =
       StreamController<void>.broadcast();
 
+  final StreamController isUserRegisteredSuccessfully =
+      StreamController<bool>();
+
   final RegisterUseCase _registerUseCase;
 
   var registerFields = const RegisterFields(
@@ -218,6 +221,8 @@ class RegisterViewModel extends BaseViewModel
         // right > success (data)
         logger.i(data.customer?.name);
         inputState.add(SuccessState());
+
+        isUserRegisteredSuccessfully.add(true);
       },
     );
   }

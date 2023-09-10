@@ -2,14 +2,17 @@ import 'dart:io';
 
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:udemy_flutter_mvvm/app/app_preferences.dart';
 import 'package:udemy_flutter_mvvm/app/di.dart';
 import 'package:udemy_flutter_mvvm/data/mapper/mapper.dart';
 import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer_implementation.dart';
 import 'package:udemy_flutter_mvvm/presentation/register/register_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/assets_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/color_manager.dart';
+import 'package:udemy_flutter_mvvm/presentation/resources/routes_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/values_manager.dart';
 
@@ -22,6 +25,7 @@ class RegisterView extends StatefulWidget {
 
 class _RegisterViewState extends State<RegisterView> {
   final RegisterViewModel _viewModel = instance<RegisterViewModel>();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   final ImagePicker picker = instance<ImagePicker>();
   final _formKey = GlobalKey<FormState>();
 
@@ -49,6 +53,14 @@ class _RegisterViewState extends State<RegisterView> {
     });
     _emailController.addListener(() {
       _viewModel.setEmail(_emailController.text);
+    });
+
+    _viewModel.isUserRegisteredSuccessfully.stream
+        .listen((isSuccessfullyLoggedIn) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        _appPreferences.setIsUserLoggedIn();
+        Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+      });
     });
   }
 
