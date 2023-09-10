@@ -30,4 +30,6 @@ class AppStrings {
   static const String username = 'Username';
   static const String usernameError = 'Username is empty';
   static const String profilePicture = 'Profile picture';
+  static const String photoGallery = 'Photo Gallery';
+  static const String photoCamera = 'Photo Camera';
 }

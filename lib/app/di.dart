@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get_it/get_it.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:udemy_flutter_mvvm/app/app_preferences.dart';
 import 'package:udemy_flutter_mvvm/data/data_source/remote_data_source.dart';
@@ -93,5 +94,8 @@ initRegisterModule() async {
   );
   instance.registerFactory<RegisterViewModel>(
     () => RegisterViewModel(instance()),
+  );
+  instance.registerFactory<ImagePicker>(
+    () => ImagePicker(),
   );
 }
