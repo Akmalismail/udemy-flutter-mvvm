@@ -67,12 +67,12 @@ class EmptyState extends FlowState {
 
 // Success state
 class SuccessState extends FlowState {
-  String message;
+  final String _message;
 
-  SuccessState(this.message);
+  SuccessState({String? message}) : _message = message ?? empty;
 
   @override
-  String getMessage() => message;
+  String getMessage() => _message;
 
   @override
   StateRendererType getStateRendererType() =>

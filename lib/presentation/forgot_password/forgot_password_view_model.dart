@@ -65,7 +65,7 @@ class ForgotPasswordViewModel extends BaseViewModel
       },
       (data) {
         // right > success (data)
-        inputState.add(SuccessState(data));
+        inputState.add(SuccessState(message: data));
         isPasswordResetSucessfullyStreamController.add(true);
       },
     );

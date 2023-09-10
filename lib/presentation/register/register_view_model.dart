@@ -217,7 +217,7 @@ class RegisterViewModel extends BaseViewModel
       (data) {
         // right > success (data)
         logger.i(data.customer?.name);
-        inputState.add(ContentState());
+        inputState.add(SuccessState());
       },
     );
   }

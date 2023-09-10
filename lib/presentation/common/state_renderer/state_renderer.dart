@@ -57,7 +57,7 @@ class StateRenderer extends StatelessWidget {
         return _getPopupDialog(context, [
           _getAnimatedImage(JsonAssets.success),
           _getMessage(AppStrings.success),
-          _getMessage(message),
+          if (message.isNotEmpty) _getMessage(message),
           _getRetryButton(AppStrings.ok, context),
         ]);
       case StateRendererType.fullscreenLoadingState:
