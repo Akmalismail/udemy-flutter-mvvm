@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:udemy_flutter_mvvm/data/network/failure.dart';
+import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
 
 enum HttpStatus {
   success(
@@ -21,7 +22,7 @@ enum HttpStatus {
   ),
   unauthorized(
     ResponseCode.unauthorized,
-    ResponseMessage.unauthorized,
+    ResponseMessage.unauthorised,
   ),
   notFound(
     ResponseCode.notFound,
@@ -37,7 +38,7 @@ enum HttpStatus {
   ),
   connectionTimeout(
     ResponseCode.connectionTimeout,
-    ResponseMessage.connectionTimeout,
+    ResponseMessage.connectTimeout,
   ),
   cancel(
     ResponseCode.cancel,
@@ -57,7 +58,7 @@ enum HttpStatus {
   ),
   noInternetConnection(
     ResponseCode.noInternetConnection,
-    ResponseMessage.noInternetConnection,
+    ResponseMessage.noInternetError,
   ),
   connectionError(
     ResponseCode.connectionError,
@@ -65,7 +66,7 @@ enum HttpStatus {
   ),
   badCertificate(
     ResponseCode.badCertificate,
-    ResponseMessage.badCertificate,
+    ResponseMessage.badRequest,
   );
 
   final int code;
@@ -172,27 +173,37 @@ class ResponseCode {
 }
 
 class ResponseMessage {
-  // http status codes.
-  static const String success = 'Success.';
-  static const String noContent = 'Success with no content.';
-  static const String badRequest = 'Bad request. Please try again later.';
-  static const String forbidden = 'Forbidden request.';
-  static const String unauthorized = 'User is not authorised.';
-  static const String notFound = 'URL not found.';
+  static const String success = AppStrings.success; // success with data
+  static const String noContent =
+      AppStrings.noContent; // success with no content
+  static const String badRequest =
+      AppStrings.badRequestError; // failure, api rejected our request
+  static const String forbidden =
+      AppStrings.forbiddenError; // failure,  api rejected our request
+  static const String unauthorised =
+      AppStrings.unauthorizedError; // failure, user is not authorised
+  static const String notFound = AppStrings
+      .notFoundError; // failure, API url is not correct and not found in api side.
   static const String internalServerError =
-      'Something went wrong server side. Please try again later.';
+      AppStrings.internalServerError; // failure, a crash happened in API side.
 
-  // local status codes.
-  static const String unknown = 'Something went wrong. Please try again later.';
-  static const String connectionTimeout = 'Connection timed out.';
-  static const String cancel = 'Request was cancelled.';
-  static const String receiveTimeout = 'Request was timed out.';
-  static const String sendTimeout = 'Request was timed out.';
-  static const String cacheError = 'Cache error. Please try again later.';
-  static const String noInternetConnection =
-      'Please check your internet connection.';
-  static const String connectionError = 'Connection error.';
-  static const String badCertificate = 'Bad certificate.';
+  // local responses codes
+  static const String unknown =
+      AppStrings.defaultError; // unknown error happened
+  static const String connectTimeout =
+      AppStrings.timeoutError; // issue in connectivity
+  static const String cancel =
+      AppStrings.defaultError; // API request was cancelled
+  static const String receiveTimeout =
+      AppStrings.timeoutError; //  issue in connectivity
+  static const String sendTimeout =
+      AppStrings.timeoutError; //  issue in connectivity
+  static const String cacheError = AppStrings
+      .defaultError; //  issue in getting data from local data source (cache)
+  static const String noInternetError =
+      AppStrings.noInternetError; // issue in connectivity
+  static const String connectionError =
+      AppStrings.connectionError; // issue in connectivity
 }
 
 class ApiInternalStatus {

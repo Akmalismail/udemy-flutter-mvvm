@@ -77,11 +77,11 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                       keyboardType: TextInputType.emailAddress,
                       controller: _emailController,
                       decoration: InputDecoration(
-                        hintText: AppStrings.email,
-                        labelText: AppStrings.email,
+                        hintText: AppStrings.emailHint,
+                        labelText: AppStrings.emailHint,
                         errorText: (snapshot.data ?? true)
                             ? null
-                            : AppStrings.emailError,
+                            : AppStrings.invalidEmail,
                       ),
                     );
                   },

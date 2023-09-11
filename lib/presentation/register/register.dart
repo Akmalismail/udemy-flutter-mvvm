@@ -190,8 +190,8 @@ class _RegisterViewState extends State<RegisterView> {
                       keyboardType: TextInputType.emailAddress,
                       controller: _emailController,
                       decoration: InputDecoration(
-                        hintText: AppStrings.email,
-                        labelText: AppStrings.email,
+                        hintText: AppStrings.emailHint,
+                        labelText: AppStrings.emailHint,
                         errorText: snapshot.data,
                       ),
                     );

@@ -24,7 +24,7 @@ class _MainViewState extends State<MainView> {
   List<String> titles = [
     AppStrings.home,
     AppStrings.search,
-    AppStrings.notification,
+    AppStrings.notifications,
     AppStrings.settings,
   ];
   var _title = AppStrings.home;
@@ -65,7 +65,7 @@ class _MainViewState extends State<MainView> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.notifications),
-              label: AppStrings.notification,
+              label: AppStrings.notifications,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
