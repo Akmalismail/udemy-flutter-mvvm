@@ -4,6 +4,8 @@ import 'package:rxdart/rxdart.dart';
 import 'package:udemy_flutter_mvvm/domain/model/model.dart';
 import 'package:udemy_flutter_mvvm/domain/use_case/home_use_case.dart';
 import 'package:udemy_flutter_mvvm/presentation/base/base_view_model.dart';
+import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer.dart';
+import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer_implementation.dart';
 
 class HomeViewModel extends BaseViewModel
     with HomeViewModelInputs, HomeViewModelOutputs {
@@ -19,7 +21,29 @@ class HomeViewModel extends BaseViewModel
   HomeViewModel(this._homeUseCase);
 
   @override
-  void start() {}
+  void start() {
+    _getHome();
+  }
+
+  _getHome() async {
+    inputState.add(
+      LoadingState(stateRendererType: StateRendererType.fullscreenLoadingState),
+    );
+
+    (await _homeUseCase.execute(null)).fold(
+      (failure) {
+        inputState.add(
+          ErrorState(StateRendererType.fullscreenErrorState, failure.message),
+        );
+      },
+      (home) {
+        inputState.add(ContentState());
+        inputBanners.add(home.data.banners);
+        inputStores.add(home.data.stores);
+        inputServices.add(home.data.services);
+      },
+    );
+  }
 
   @override
   void dispose() {
