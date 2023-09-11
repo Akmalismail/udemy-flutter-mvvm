@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:udemy_flutter_mvvm/data/data_source/local_data_source.dart';
 import 'package:udemy_flutter_mvvm/data/data_source/remote_data_source.dart';
 import 'package:udemy_flutter_mvvm/data/mapper/mapper.dart';
 import 'package:udemy_flutter_mvvm/data/network/error_handler.dart';
@@ -10,9 +11,11 @@ import 'package:udemy_flutter_mvvm/domain/respository/repository.dart';
 
 class RepositoryImplementer extends Repository {
   final RemoteDataSource _remoteDataSource;
+  final LocalDataSource _localDataSource;
   final NetworkInfo _networkInfo;
 
-  RepositoryImplementer(this._remoteDataSource, this._networkInfo);
+  RepositoryImplementer(
+      this._remoteDataSource, this._localDataSource, this._networkInfo);
 
   @override
   Future<Either<Failure, Authentication>> login(
@@ -107,29 +110,37 @@ class RepositoryImplementer extends Repository {
 
   @override
   Future<Either<Failure, Home>> getHome() async {
-// no network
-    if (!await _networkInfo.isConnected) {
-      return Left(HttpStatus.noInternetConnection.failure);
-    }
-
     try {
-      // request
-      final response = await _remoteDataSource.getHome();
-
-      // http error
-      if (response.status != ApiInternalStatus.success) {
-        return Left(
-          Failure(
-            response.status ?? ApiInternalStatus.failure,
-            response.message ?? HttpStatus.unknown.message,
-          ),
-        );
+      // get from cache
+      final response = await _localDataSource.getHome();
+      return Right(response.toDomain());
+    } catch (cacheError) {
+      // we have cache error so we should call API
+      // no network
+      if (!await _networkInfo.isConnected) {
+        return Left(HttpStatus.noInternetConnection.failure);
       }
 
-      // success
-      return Right(response.toDomain());
-    } catch (error) {
-      return Left(ErrorHandler.handle(error).failure);
+      try {
+        // request
+        final response = await _remoteDataSource.getHome();
+
+        // http error
+        if (response.status != ApiInternalStatus.success) {
+          return Left(
+            Failure(
+              response.status ?? ApiInternalStatus.failure,
+              response.message ?? HttpStatus.unknown.message,
+            ),
+          );
+        }
+
+        // success
+        _localDataSource.saveHomeToCache(response);
+        return Right(response.toDomain());
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
     }
   }
 }

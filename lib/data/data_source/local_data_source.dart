@@ -8,15 +8,19 @@ abstract class LocalDataSource {
   Future<HomeResponse> getHome();
 
   Future<void> saveHomeToCache(HomeResponse homeResponse);
+
+  void clearCache();
+
+  void removeFromCache(String key);
 }
 
 class LocalDataSourceImplementer implements LocalDataSource {
   // run time cache
-  Map<String, CachedItem> cacheMap = {};
+  final Map<String, CachedItem> _cacheMap = {};
 
   @override
   Future<HomeResponse> getHome() async {
-    CachedItem? cachedItem = cacheMap[cacheHomeKey];
+    CachedItem? cachedItem = _cacheMap[cacheHomeKey];
 
     if (cachedItem != null && cachedItem.isValid(cacheHomeInterval)) {
       // return the response from cache
@@ -29,7 +33,17 @@ class LocalDataSourceImplementer implements LocalDataSource {
 
   @override
   Future<void> saveHomeToCache(HomeResponse homeResponse) async {
-    cacheMap[cacheHomeKey] = CachedItem(homeResponse);
+    _cacheMap[cacheHomeKey] = CachedItem(homeResponse);
+  }
+
+  @override
+  void clearCache() {
+    _cacheMap.clear();
+  }
+
+  @override
+  void removeFromCache(String key) {
+    _cacheMap.remove(key);
   }
 }
 
