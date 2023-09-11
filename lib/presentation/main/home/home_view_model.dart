@@ -16,7 +16,7 @@ class HomeViewModel extends BaseViewModel
   final StreamController _storeStreamController =
       BehaviorSubject<List<Store>>();
   final StreamController _bannerStreamController =
-      BehaviorSubject<List<Banner>>();
+      BehaviorSubject<List<BannerAd>>();
 
   HomeViewModel(this._homeUseCase);
 
@@ -63,7 +63,7 @@ class HomeViewModel extends BaseViewModel
   Sink get inputStores => _storeStreamController.sink;
 
   @override
-  Stream<List<Banner>> get outputBanners =>
+  Stream<List<BannerAd>> get outputBanners =>
       _bannerStreamController.stream.map((banner) => banner);
 
   @override
@@ -84,5 +84,5 @@ abstract class HomeViewModelInputs {
 abstract class HomeViewModelOutputs {
   Stream<List<Store>> get outputStores;
   Stream<List<Service>> get outputServices;
-  Stream<List<Banner>> get outputBanners;
+  Stream<List<BannerAd>> get outputBanners;
 }

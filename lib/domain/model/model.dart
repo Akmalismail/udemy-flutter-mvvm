@@ -65,13 +65,13 @@ class Store {
   );
 }
 
-class Banner {
+class BannerAd {
   final int id;
   final String title;
   final String image;
   final String link;
 
-  const Banner(
+  const BannerAd(
     this.id,
     this.title,
     this.image,
@@ -82,7 +82,7 @@ class Banner {
 class HomeData {
   final List<Service> services;
   final List<Store> stores;
-  final List<Banner> banners;
+  final List<BannerAd> banners;
 
   const HomeData(
     this.services,
