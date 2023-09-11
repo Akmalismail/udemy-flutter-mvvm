@@ -46,4 +46,8 @@ class AppPreferences {
         ) ??
         false;
   }
+
+  Future<void> logout() async {
+    _sharedPreferences.remove(PreferencesKey.prefsKeyIsUserLoggedIn.name);
+  }
 }
