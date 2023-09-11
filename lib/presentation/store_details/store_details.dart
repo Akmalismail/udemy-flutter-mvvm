@@ -30,21 +30,21 @@ class _StoreDetailsViewState extends State<StoreDetailsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SingleChildScrollView(
-        child: StreamBuilder<FlowState>(
-          stream: _viewModel.outputState,
-          builder: (context, snapshot) {
-            return snapshot.data?.getScreenWidget(
+    return Scaffold(
+      body: StreamBuilder<FlowState>(
+        stream: _viewModel.outputState,
+        builder: (context, snapshot) {
+          return Scaffold(
+            body: snapshot.data?.getScreenWidget(
                   context,
                   _getContentWidget(),
                   () {
                     _viewModel.start();
                   },
                 ) ??
-                Container();
-          },
-        ),
+                Container(),
+          );
+        },
       ),
     );
   }

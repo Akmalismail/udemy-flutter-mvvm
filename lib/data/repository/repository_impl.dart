@@ -35,7 +35,7 @@ class RepositoryImplementer extends Repository {
         return Left(
           Failure(
             response.status ?? ApiInternalStatus.failure,
-            response.message ?? HttpStatus.unknown.message,
+            response.message ?? HttpStatus.unknown.failure.message,
           ),
         );
       }
@@ -66,7 +66,7 @@ class RepositoryImplementer extends Repository {
         return Left(
           Failure(
             response.status ?? ApiInternalStatus.failure,
-            response.message ?? HttpStatus.unknown.message,
+            response.message ?? HttpStatus.unknown.failure.message,
           ),
         );
       }
@@ -96,7 +96,7 @@ class RepositoryImplementer extends Repository {
         return Left(
           Failure(
             response.status ?? ApiInternalStatus.failure,
-            response.message ?? HttpStatus.unknown.message,
+            response.message ?? HttpStatus.unknown.failure.message,
           ),
         );
       }
@@ -130,7 +130,7 @@ class RepositoryImplementer extends Repository {
           return Left(
             Failure(
               response.status ?? ApiInternalStatus.failure,
-              response.message ?? HttpStatus.unknown.message,
+              response.message ?? HttpStatus.unknown.failure.message,
             ),
           );
         }
@@ -166,7 +166,7 @@ class RepositoryImplementer extends Repository {
           return Left(
             Failure(
               response.status ?? ApiInternalStatus.failure,
-              response.message ?? HttpStatus.unknown.message,
+              response.message ?? HttpStatus.unknown.failure.message,
             ),
           );
         }

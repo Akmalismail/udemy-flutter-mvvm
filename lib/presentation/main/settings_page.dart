@@ -1,10 +1,14 @@
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter_mvvm/app/app_preferences.dart';
 import 'package:udemy_flutter_mvvm/app/di.dart';
 import 'package:udemy_flutter_mvvm/data/data_source/local_data_source.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/assets_manager.dart';
+import 'package:udemy_flutter_mvvm/presentation/resources/language_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/routes_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/values_manager.dart';
@@ -28,10 +32,16 @@ class _SettingsPageState extends State<SettingsPage> {
         ListTile(
           title: Text(
             AppStrings.changeLanguage.tr(),
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.labelLarge,
           ),
           leading: SvgPicture.asset(ImageAssets.changeLanguageIcon),
-          trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIcon),
+          trailing: Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.rotationY(isRtl() ? pi : 0),
+            child: SvgPicture.asset(
+              ImageAssets.settingsRightArrowIcon,
+            ),
+          ),
           onTap: () {
             _changeLanguage();
           },
@@ -39,10 +49,16 @@ class _SettingsPageState extends State<SettingsPage> {
         ListTile(
           title: Text(
             AppStrings.contactUs.tr(),
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.labelLarge,
           ),
           leading: SvgPicture.asset(ImageAssets.contactUsIcon),
-          trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIcon),
+          trailing: Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.rotationY(isRtl() ? pi : 0),
+            child: SvgPicture.asset(
+              ImageAssets.settingsRightArrowIcon,
+            ),
+          ),
           onTap: () {
             _contactUs();
           },
@@ -50,10 +66,16 @@ class _SettingsPageState extends State<SettingsPage> {
         ListTile(
           title: Text(
             AppStrings.inviteYourFriends.tr(),
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.labelLarge,
           ),
           leading: SvgPicture.asset(ImageAssets.inviteFriendsIcon),
-          trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIcon),
+          trailing: Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.rotationY(isRtl() ? pi : 0),
+            child: SvgPicture.asset(
+              ImageAssets.settingsRightArrowIcon,
+            ),
+          ),
           onTap: () {
             _inviteFriends();
           },
@@ -61,10 +83,16 @@ class _SettingsPageState extends State<SettingsPage> {
         ListTile(
           title: Text(
             AppStrings.logout.tr(),
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.labelLarge,
           ),
           leading: SvgPicture.asset(ImageAssets.logoutIcon),
-          trailing: SvgPicture.asset(ImageAssets.settingsRightArrowIcon),
+          trailing: Transform(
+            alignment: Alignment.center,
+            transform: Matrix4.rotationY(isRtl() ? pi : 0),
+            child: SvgPicture.asset(
+              ImageAssets.settingsRightArrowIcon,
+            ),
+          ),
           onTap: () {
             _logout();
           },
@@ -73,8 +101,14 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
+  bool isRtl() {
+    return context.locale == arabicLocale;
+  }
+
   void _changeLanguage() {
     // add localization later
+    _appPreferences.setLanguageChanged();
+    Phoenix.rebirth(context);
   }
 
   void _contactUs() {
