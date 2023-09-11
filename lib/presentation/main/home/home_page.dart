@@ -31,34 +31,40 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: StreamBuilder<FlowState>(
-        stream: _viewModel.outputState,
-        builder: (context, snapshot) {
-          return snapshot.data?.getScreenWidget(
-                context,
-                _getContentWidget(),
-                () {
-                  _viewModel.start();
-                },
-              ) ??
-              Container();
-        },
+    return Center(
+      child: SingleChildScrollView(
+        child: StreamBuilder<FlowState>(
+          stream: _viewModel.outputState,
+          builder: (context, snapshot) {
+            return snapshot.data?.getScreenWidget(
+                  context,
+                  _getContentWidget(),
+                  () {
+                    _viewModel.start();
+                  },
+                ) ??
+                Container();
+          },
+        ),
       ),
     );
   }
 
   Widget _getContentWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _getBannersCarousel(),
-        _getSection(AppStrings.services),
-        _getServicesCarousel(),
-        _getSection(AppStrings.stores),
-        _getStoresCarousel(),
-      ],
-    );
+    return StreamBuilder<HomeViewObject>(
+        stream: _viewModel.outputHomeData,
+        builder: (context, snapshot) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _getBanner(snapshot.data?.banners),
+              _getSection(AppStrings.services),
+              _getServices(snapshot.data?.services),
+              _getSection(AppStrings.stores),
+              _getStores(snapshot.data?.stores),
+            ],
+          );
+        });
   }
 
   Widget _getSection(String title) {
@@ -73,15 +79,6 @@ class _HomePageState extends State<HomePage> {
         title,
         style: Theme.of(context).textTheme.displaySmall,
       ),
-    );
-  }
-
-  Widget _getBannersCarousel() {
-    return StreamBuilder<List<BannerAd>>(
-      stream: _viewModel.outputBanners,
-      builder: (context, snapshot) {
-        return _getBanner(snapshot.data);
-      },
     );
   }
 
@@ -123,15 +120,6 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Container();
     }
-  }
-
-  Widget _getServicesCarousel() {
-    return StreamBuilder<List<Service>>(
-      stream: _viewModel.outputServices,
-      builder: (context, snapshot) {
-        return _getServices(snapshot.data);
-      },
-    );
   }
 
   Widget _getServices(List<Service>? services) {
@@ -191,15 +179,6 @@ class _HomePageState extends State<HomePage> {
     } else {
       return Container();
     }
-  }
-
-  Widget _getStoresCarousel() {
-    return StreamBuilder<List<Store>>(
-      stream: _viewModel.outputStores,
-      builder: (context, snapshot) {
-        return _getStores(snapshot.data);
-      },
-    );
   }
 
   Widget _getStores(List<Store>? stores) {
