@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_mvvm/data/mapper/mapper.dart';
 import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer.dart';
@@ -16,7 +17,7 @@ class LoadingState extends FlowState {
   LoadingState({
     required this.stateRendererType,
     String? message,
-  }) : message = message ?? AppStrings.loading;
+  }) : message = message ?? AppStrings.loading.tr();
 
   @override
   String getMessage() => message;

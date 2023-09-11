@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:udemy_flutter_mvvm/app/app_preferences.dart';
@@ -26,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
       children: [
         ListTile(
           title: Text(
-            AppStrings.changeLanguage,
+            AppStrings.changeLanguage.tr(),
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           leading: SvgPicture.asset(ImageAssets.changeLanguageIcon),
@@ -37,7 +38,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         ListTile(
           title: Text(
-            AppStrings.contactUs,
+            AppStrings.contactUs.tr(),
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           leading: SvgPicture.asset(ImageAssets.contactUsIcon),
@@ -48,7 +49,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         ListTile(
           title: Text(
-            AppStrings.inviteYourFriends,
+            AppStrings.inviteYourFriends.tr(),
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           leading: SvgPicture.asset(ImageAssets.inviteFriendsIcon),
@@ -59,7 +60,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         ListTile(
           title: Text(
-            AppStrings.logout,
+            AppStrings.logout.tr(),
             style: Theme.of(context).textTheme.headlineMedium,
           ),
           leading: SvgPicture.asset(ImageAssets.logoutIcon),

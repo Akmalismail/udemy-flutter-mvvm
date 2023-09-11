@@ -1,80 +1,100 @@
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:logger/logger.dart';
 import 'package:udemy_flutter_mvvm/data/network/failure.dart';
 import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
 
 enum HttpStatus {
-  success(
-    ResponseCode.success,
-    ResponseMessage.success,
-  ),
-  noContent(
-    ResponseCode.noContent,
-    ResponseMessage.noContent,
-  ),
-  badRequest(
-    ResponseCode.badRequest,
-    ResponseMessage.badRequest,
-  ),
-  forbidden(
-    ResponseCode.forbidden,
-    ResponseMessage.forbidden,
-  ),
-  unauthorized(
-    ResponseCode.unauthorized,
-    ResponseMessage.unauthorised,
-  ),
-  notFound(
-    ResponseCode.notFound,
-    ResponseMessage.notFound,
-  ),
-  internalServerError(
-    ResponseCode.internalServerError,
-    ResponseMessage.internalServerError,
-  ),
-  unknown(
-    ResponseCode.unknown,
-    ResponseMessage.unknown,
-  ),
-  connectionTimeout(
-    ResponseCode.connectionTimeout,
-    ResponseMessage.connectTimeout,
-  ),
-  cancel(
-    ResponseCode.cancel,
-    ResponseMessage.cancel,
-  ),
-  receiveTimeout(
-    ResponseCode.receiveTimeout,
-    ResponseMessage.receiveTimeout,
-  ),
-  sendTimeout(
-    ResponseCode.sendTimeout,
-    ResponseMessage.sendTimeout,
-  ),
-  cacheError(
-    ResponseCode.cacheError,
-    ResponseMessage.cacheError,
-  ),
-  noInternetConnection(
-    ResponseCode.noInternetConnection,
-    ResponseMessage.noInternetError,
-  ),
-  connectionError(
-    ResponseCode.connectionError,
-    ResponseMessage.connectionError,
-  ),
-  badCertificate(
-    ResponseCode.badCertificate,
-    ResponseMessage.badRequest,
-  );
+  success,
+  noContent,
+  badRequest,
+  forbidden,
+  unauthorized,
+  notFound,
+  internalServerError,
+  unknown,
+  connectionTimeout,
+  cancel,
+  receiveTimeout,
+  sendTimeout,
+  cacheError,
+  noInternetConnection,
+  connectionError,
+  badCertificate,
+}
 
-  final int code;
-  final String message;
-
-  const HttpStatus(this.code, this.message);
-
+extension HttpStatusX on HttpStatus {
   Failure get failure {
+    int code;
+    String message;
+
+    switch (this) {
+      case HttpStatus.success:
+        code = ResponseCode.success;
+        message = ResponseMessage.success.tr();
+        break;
+      case HttpStatus.noContent:
+        code = ResponseCode.noContent;
+        message = ResponseMessage.noContent.tr();
+        break;
+      case HttpStatus.badRequest:
+        code = ResponseCode.badRequest;
+        message = ResponseMessage.badRequest.tr();
+        break;
+      case HttpStatus.forbidden:
+        code = ResponseCode.forbidden;
+        message = ResponseMessage.forbidden.tr();
+        break;
+      case HttpStatus.unauthorized:
+        code = ResponseCode.unauthorized;
+        message = ResponseMessage.unauthorised.tr();
+        break;
+      case HttpStatus.notFound:
+        code = ResponseCode.notFound;
+        message = ResponseMessage.notFound.tr();
+        break;
+      case HttpStatus.internalServerError:
+        code = ResponseCode.internalServerError;
+        message = ResponseMessage.internalServerError.tr();
+        break;
+      case HttpStatus.unknown:
+        code = ResponseCode.unknown;
+        message = ResponseMessage.unknown.tr();
+        break;
+      case HttpStatus.connectionTimeout:
+        code = ResponseCode.connectionTimeout;
+        message = ResponseMessage.connectTimeout.tr();
+        break;
+      case HttpStatus.cancel:
+        code = ResponseCode.cancel;
+        message = ResponseMessage.cancel.tr();
+        break;
+      case HttpStatus.receiveTimeout:
+        code = ResponseCode.receiveTimeout;
+        message = ResponseMessage.receiveTimeout.tr();
+        break;
+      case HttpStatus.sendTimeout:
+        code = ResponseCode.sendTimeout;
+        message = ResponseMessage.sendTimeout.tr();
+        break;
+      case HttpStatus.cacheError:
+        code = ResponseCode.cacheError;
+        message = ResponseMessage.cacheError.tr();
+        break;
+      case HttpStatus.noInternetConnection:
+        code = ResponseCode.noInternetConnection;
+        message = ResponseMessage.noInternetError.tr();
+        break;
+      case HttpStatus.connectionError:
+        code = ResponseCode.connectionError;
+        message = ResponseMessage.connectionError.tr();
+        break;
+      case HttpStatus.badCertificate:
+        code = ResponseCode.badCertificate;
+        message = ResponseMessage.badRequest.tr();
+        break;
+    }
+
     return Failure(
       code,
       message,
