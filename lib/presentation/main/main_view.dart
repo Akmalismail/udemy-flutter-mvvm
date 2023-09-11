@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:udemy_flutter_mvvm/presentation/main/home_page.dart';
+import 'package:udemy_flutter_mvvm/presentation/main/home/home_page.dart';
 import 'package:udemy_flutter_mvvm/presentation/main/notifications_page.dart';
 import 'package:udemy_flutter_mvvm/presentation/main/search_page.dart';
 import 'package:udemy_flutter_mvvm/presentation/main/settings_page.dart';
