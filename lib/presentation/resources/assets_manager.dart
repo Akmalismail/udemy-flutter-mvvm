@@ -13,6 +13,12 @@ class ImageAssets {
   static const String solidCircleIcon = '$imagePath/solid_circle_ic.svg';
   static const String splashLogo = '$imagePath/splash_logo.png';
   static const String photoCameraIcon = '$imagePath/photo_camera_ic.svg';
+  static const String changeLanguageIcon = '$imagePath/change_lang_ic.svg';
+  static const String contactUsIcon = '$imagePath/contact_us_ic.svg';
+  static const String inviteFriendsIcon = '$imagePath/invite_friends_ic.svg';
+  static const String logoutIcon = '$imagePath/logout_ic.svg';
+  static const String settingsRightArrowIcon =
+      '$imagePath/settings_right_arrow_ic.svg';
 }
 
 class JsonAssets {
