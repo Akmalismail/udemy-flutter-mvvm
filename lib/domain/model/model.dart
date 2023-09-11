@@ -98,3 +98,19 @@ class Home {
     this.data,
   );
 }
+
+class StoreDetails {
+  final String image;
+  final int id;
+  final String details;
+  final String services;
+  final String about;
+
+  const StoreDetails(
+    this.image,
+    this.id,
+    this.details,
+    this.services,
+    this.about,
+  );
+}

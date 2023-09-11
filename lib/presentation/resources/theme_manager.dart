@@ -67,7 +67,7 @@ ThemeData getApplicationTheme() {
       displaySmall: getRegularStyle(
         color: ColorManager.primary,
         fontSize: FontSize.s16,
-      ), // headline2
+      ), // headline3
       titleMedium: getMediumStyle(
         color: ColorManager.lightGrey,
         fontSize: FontSize.s14,
@@ -81,6 +81,9 @@ ThemeData getApplicationTheme() {
       ), // caption
       bodyLarge: getRegularStyle(
         color: ColorManager.grey,
+      ), // bodyText1
+      bodyMedium: getRegularStyle(
+        color: ColorManager.lightGrey,
       ), // bodyText1
     ),
 

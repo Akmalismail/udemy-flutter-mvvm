@@ -14,10 +14,12 @@ import 'package:udemy_flutter_mvvm/domain/use_case/forgot_password_use_case.dart
 import 'package:udemy_flutter_mvvm/domain/use_case/home_use_case.dart';
 import 'package:udemy_flutter_mvvm/domain/use_case/login_use_case.dart';
 import 'package:udemy_flutter_mvvm/domain/use_case/register_use_case.dart';
+import 'package:udemy_flutter_mvvm/domain/use_case/store_details_use_case.dart';
 import 'package:udemy_flutter_mvvm/presentation/forgot_password/forgot_password_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/login/login_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/main/home/home_view_model.dart';
 import 'package:udemy_flutter_mvvm/presentation/register/register_view_model.dart';
+import 'package:udemy_flutter_mvvm/presentation/store_details/store_details_view_model.dart';
 
 final instance = GetIt.instance;
 
@@ -118,5 +120,18 @@ initHomeModule() async {
   );
   instance.registerFactory<HomeViewModel>(
     () => HomeViewModel(instance()),
+  );
+}
+
+initStoreDetailsModule() async {
+  if (instance.isRegistered<StoreDetailsUseCase>()) {
+    return;
+  }
+
+  instance.registerFactory<StoreDetailsUseCase>(
+    () => StoreDetailsUseCase(instance()),
+  );
+  instance.registerFactory<StoreDetailsViewModal>(
+    () => StoreDetailsViewModal(instance()),
   );
 }

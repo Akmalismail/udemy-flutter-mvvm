@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_mvvm/app/di.dart';
+import 'package:udemy_flutter_mvvm/domain/model/model.dart';
+import 'package:udemy_flutter_mvvm/presentation/common/state_renderer/state_renderer_implementation.dart';
+import 'package:udemy_flutter_mvvm/presentation/resources/color_manager.dart';
+import 'package:udemy_flutter_mvvm/presentation/resources/strings_manager.dart';
+import 'package:udemy_flutter_mvvm/presentation/resources/values_manager.dart';
+import 'package:udemy_flutter_mvvm/presentation/store_details/store_details_view_model.dart';
 
 class StoreDetailsView extends StatefulWidget {
   const StoreDetailsView({super.key});
@@ -8,8 +15,117 @@ class StoreDetailsView extends StatefulWidget {
 }
 
 class _StoreDetailsViewState extends State<StoreDetailsView> {
+  final StoreDetailsViewModal _viewModel = instance<StoreDetailsViewModal>();
+
+  @override
+  void initState() {
+    super.initState();
+    _bind();
+  }
+
+  _bind() {
+    _viewModel.start();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Center(
+      child: SingleChildScrollView(
+        child: StreamBuilder<FlowState>(
+          stream: _viewModel.outputState,
+          builder: (context, snapshot) {
+            return snapshot.data?.getScreenWidget(
+                  context,
+                  _getContentWidget(),
+                  () {
+                    _viewModel.start();
+                  },
+                ) ??
+                Container();
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _getContentWidget() {
+    return Scaffold(
+      backgroundColor: ColorManager.white,
+      appBar: AppBar(
+        title: const Text(AppStrings.storeDetails),
+        elevation: AppSize.s0,
+        iconTheme: IconThemeData(color: ColorManager.white),
+        backgroundColor: ColorManager.primary,
+        centerTitle: true,
+      ),
+      body: Container(
+        constraints: const BoxConstraints.expand(),
+        color: ColorManager.white,
+        child: SingleChildScrollView(
+          child: StreamBuilder<StoreDetails>(
+            stream: _viewModel.outputStoreDetails,
+            builder: (context, snapshot) {
+              return _getItems(snapshot.data);
+            },
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _getItems(StoreDetails? storeDetails) {
+    if (storeDetails != null) {
+      return Column(
+        children: [
+          Center(
+            child: Image.network(
+              storeDetails.image,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: 250,
+            ),
+          ),
+          _getSection(AppStrings.details),
+          _getInfoText(storeDetails.details),
+          _getSection(AppStrings.services),
+          _getInfoText(storeDetails.services),
+          _getSection(AppStrings.about),
+          _getInfoText(storeDetails.about),
+        ],
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  Widget _getSection(String title) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: AppPadding.p12,
+        left: AppPadding.p12,
+        right: AppPadding.p12,
+        bottom: AppPadding.p2,
+      ),
+      child: Text(
+        title,
+        style: Theme.of(context).textTheme.displaySmall,
+      ),
+    );
+  }
+
+  Widget _getInfoText(String info) {
+    return Padding(
+      padding: const EdgeInsets.all(AppSize.s12),
+      child: Text(
+        info,
+        style: Theme.of(context).textTheme.bodyMedium,
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
   }
 }

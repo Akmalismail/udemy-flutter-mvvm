@@ -99,3 +99,15 @@ extension HomeResponseMapper on HomeResponse? {
     );
   }
 }
+
+extension StoreDetailsResponseMapper on StoreDetailsResponse? {
+  StoreDetails toDomain() {
+    return StoreDetails(
+      this?.image ?? empty,
+      this?.id ?? zero,
+      this?.details ?? empty,
+      this?.services ?? empty,
+      this?.about ?? empty,
+    );
+  }
+}

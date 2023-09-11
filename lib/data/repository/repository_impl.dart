@@ -143,4 +143,40 @@ class RepositoryImplementer extends Repository {
       }
     }
   }
+
+  @override
+  Future<Either<Failure, StoreDetails>> getStoreDetails() async {
+    try {
+      // get from cache
+      final response = await _localDataSource.getStoreDetails();
+      return Right(response.toDomain());
+    } catch (cacheError) {
+      // we have cache error so we should call API
+      // no network
+      if (!await _networkInfo.isConnected) {
+        return Left(HttpStatus.noInternetConnection.failure);
+      }
+
+      try {
+        // request
+        final response = await _remoteDataSource.getStoreDetails();
+
+        // http error
+        if (response.status != ApiInternalStatus.success) {
+          return Left(
+            Failure(
+              response.status ?? ApiInternalStatus.failure,
+              response.message ?? HttpStatus.unknown.message,
+            ),
+          );
+        }
+
+        // success
+        _localDataSource.saveStoreDetailToCache(response);
+        return Right(response.toDomain());
+      } catch (error) {
+        return Left(ErrorHandler.handle(error).failure);
+      }
+    }
+  }
 }
