@@ -101,6 +101,7 @@ class _HomePageState extends State<HomePage> {
                       width: AppSize.s1_5,
                     ),
                   ),
+                  borderOnForeground: false,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(AppSize.s12),
                     child: Image.network(
@@ -141,7 +142,7 @@ class _HomePageState extends State<HomePage> {
           right: AppPadding.p12,
         ),
         child: Container(
-          height: AppSize.s140,
+          height: AppSize.s130,
           margin: const EdgeInsets.symmetric(vertical: AppMargin.m12),
           child: ListView(
             scrollDirection: Axis.horizontal,
@@ -163,7 +164,8 @@ class _HomePageState extends State<HomePage> {
                           child: Image.network(
                             service.image,
                             fit: BoxFit.cover,
-                            width: AppSize.s130,
+                            width: AppSize.s100,
+                            height: AppSize.s90,
                           ),
                         ),
                         Padding(
@@ -217,19 +219,24 @@ class _HomePageState extends State<HomePage> {
               physics: const ScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: 2,
-              children: List.generate(stores.length, (index) {
-                return InkWell(
-                  onTap: () {
-                    // navigate to store details screen
-                    Navigator.of(context).pushNamed(Routes.storeDetailsRoute);
-                  },
-                  child: Card(
-                    elevation: AppSize.s4,
-                    child:
-                        Image.network(stores[index].image, fit: BoxFit.cover),
-                  ),
-                );
-              }),
+              children: List.generate(
+                stores.length,
+                (index) {
+                  return InkWell(
+                    onTap: () {
+                      // navigate to store details screen
+                      Navigator.of(context).pushNamed(Routes.storeDetailsRoute);
+                    },
+                    child: Card(
+                      elevation: AppSize.s4,
+                      child: Image.network(
+                        stores[index].image,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
